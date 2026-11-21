@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV LexiSpark — Smart 20-Day English Vocabulary Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-base: #060913;
+      --bg-elevated: rgba(15, 23, 42, 0.78);
+      --bg-card: rgba(23, 35, 58, 0.82);
+      --bg-card-hover: rgba(34, 49, 80, 0.92);
+      --border-subtle: rgba(148, 163, 184, 0.16);
+      --border-strong: rgba(56, 189, 248, 0.38);
+      --cyan: #38bdf8;
+      --indigo: #818cf8;
+      --emerald: #34d399;
+      --amber: #fbbf24;
+      --rose: #fb7185;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-soft: #cbd5e1;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow-glow: 0 18px 45px -15px rgba(2, 6, 23, 0.85);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans Malayalam', sans-serif;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(56, 189, 248, 0.14), transparent 34%),
+        radial-gradient(circle at 88% 15%, rgba(129, 140, 248, 0.14), transparent 36%),
+        radial-gradient(circle at 50% 95%, rgba(52, 211, 153, 0.08), transparent 40%),
+        var(--bg-base);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.55;
+      padding-bottom: 60px;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 20px 18px;
+    }
+
+    /* Top Header */
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      background: var(--bg-elevated);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 16px 22px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0284c7, #6366f1);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: 0.5px;
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.35);
+    }
+
+    .brand-title h1 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-title h1 span.tag {
+      font-size: 0.72rem;
+      background: rgba(56, 189, 248, 0.16);
+      color: var(--cyan);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .brand-title p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      border: 1px solid var(--border-subtle);
+      background: rgba(30, 41, 59, 0.85);
+      color: var(--text-main);
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background: rgba(51, 65, 85, 0.95);
+      border-color: var(--border-strong);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0ea5e9, #6366f1);
+      border: none;
+      color: #fff;
+      box-shadow: 0 8px 22px -6px rgba(14, 165, 233, 0.55);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    .btn-emerald {
+      background: linear-gradient(135deg, #10b981, #059669);
+      border: none;
+      color: #fff;
+    }
+
+    .btn-amber {
+      background: rgba(251, 191, 36, 0.14);
+      border-color: rgba(251, 191, 36, 0.4);
+      color: var(--amber);
+    }
+
+    .btn-rose {
+      background: rgba(251, 113, 133, 0.14);
+      border-color: rgba(251, 113, 133, 0.4);
+      color: var(--rose);
+    }
+
+    /* Bento Stats Grid */
+    .bento-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .stat-value {
+      font-size: 1.65rem;
+      font-weight: 800;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .stat-sub {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .progress-bar-wrap {
+      width: 100%;
+      height: 8px;
+      background: rgba(148, 163, 184, 0.16);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan), var(--emerald));
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    /* Mode Tabs & Day Selector */
+    .control-panel {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      margin-bottom: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mode-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tab-btn {
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(15, 23, 42, 0.65);
+      color: var(--text-soft);
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: var(--cyan);
+      color: #fff;
+    }
+
+    .pill-count {
+      background: rgba(255, 255, 255, 0.12);
+      padding: 1px 7px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+    }
+
+    .day-strip {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+
+    .day-strip::-webkit-scrollbar {
+      height: 6px;
+    }
+    .day-strip::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.25);
+      border-radius: 999px;
+    }
+
+    .day-chip {
+      flex: 0 0 auto;
+      padding: 8px 14px;
+      border-radius: 11px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(15, 23, 42, 0.75);
+      color: var(--text-soft);
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .day-chip.active {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.28), rgba(99, 102, 241, 0.28));
+      border-color: var(--cyan);
+      color: #fff;
+    }
+
+    .day-chip.completed {
+      border-color: rgba(52, 211, 153, 0.45);
+      color: var(--emerald);
+    }
+
+    /* Cards Grid (Learn Mode) */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 18px;
+    }
+
+    .word-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.22s ease, border-color 0.22s ease;
+      box-shadow: 0 12px 30px -12px rgba(2, 6, 23, 0.7);
+    }
+
+    .word-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-strong);
+      background: var(--bg-card-hover);
+    }
+
+    .word-visual {
+      width: 100%;
+      height: 155px;
+      position: relative;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      overflow: hidden;
+    }
+
+    .word-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .visual-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(6, 9, 19, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--cyan);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+
+    .card-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .word-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .word-en {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+
+    .word-pos {
+      font-size: 0.76rem;
+      color: var(--indigo);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .audio-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      background: rgba(56, 189, 248, 0.14);
+      color: var(--cyan);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 1.05rem;
+      flex-shrink: 0;
+      transition: all 0.18s;
+    }
+
+    .audio-btn:hover {
+      background: var(--cyan);
+      color: #060913;
+    }
+
+    .word-ml {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--emerald);
+    }
+
+    .context-box {
+      background: rgba(6, 9, 19, 0.48);
+      border-left: 3px solid var(--cyan);
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      color: var(--text-soft);
+    }
+
+    .context-box small {
+      display: block;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-size: 0.8rem;
+    }
+
+    .card-footer {
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .mastery-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.14);
+      color: var(--text-muted);
+    }
+
+    .mastery-tag.done {
+      background: rgba(52, 211, 153, 0.16);
+      color: var(--emerald);
+    }
+
+    .mastery-tag.weak {
+      background: rgba(251, 113, 133, 0.16);
+      color: var(--rose);
+    }
+
+    /* Practice / Quiz Arena */
+    .arena-box {
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .arena-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .stage-pill {
+      background: rgba(129, 140, 248, 0.18);
+      border: 1px solid rgba(129, 140, 248, 0.4);
+      color: var(--indigo);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .no-image-note {
+      font-size: 0.76rem;
+      color: var(--amber);
+      background: rgba(251, 191, 36, 0.1);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+
+    .prompt-card {
+      background: rgba(6, 9, 19, 0.55);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 22px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .prompt-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .prompt-main {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .prompt-hint {
+      font-size: 0.92rem;
+      color: var(--text-soft);
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .option-btn {
+      padding: 15px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(15, 23, 42, 0.85);
+      color: #fff;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.18s;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--cyan);
+      background: rgba(56, 189, 248, 0.14);
+    }
+
+    .option-btn.correct {
+      background: rgba(16, 185, 129, 0.24);
+      border-color: var(--emerald);
+      color: var(--emerald);
+    }
+
+    .option-btn.wrong {
+      background: rgba(244, 63, 94, 0.22);
+      border-color: var(--rose);
+      color: var(--rose);
+    }
+
+    .recall-input-wrap {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .recall-input {
+      flex: 1;
+      min-width: 220px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border-strong);
+      background: rgba(6, 9, 19, 0.8);
+      color: #fff;
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 600;
+      outline: none;
+    }
+
+    .feedback-banner {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      display: none;
+    }
+
+    .feedback-banner.good {
+      display: block;
+      background: rgba(16, 185, 129, 0.18);
+      border: 1px solid rgba(52, 211, 153, 0.45);
+      color: var(--emerald);
+    }
+
+    .feedback-banner.bad {
+      display: block;
+      background: rgba(244, 63, 94, 0.18);
+      border: 1px solid rgba(251, 113, 133, 0.45);
+      color: var(--rose);
+    }
+
+    /* Empty State */
+    .empty-box {
+      text-align: center;
+      padding: 48px 20px;
+      background: var(--bg-elevated);
+      border: 1px dashed var(--border-subtle);
+      border-radius: var(--radius-lg);
+      color: var(--text-soft);
+    }
+
+    /* Modal / Certificate */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.85);
+      backdrop-filter: blur(8px);
+      display: none;
+      place-items: center;
+      padding: 18px;
+      z-index: 100;
+    }
+
+    .modal-overlay.open {
+      display: grid;
+    }
+
+    .cert-card {
+      background: #fff;
+      color: #0f172a;
+      max-width: 680px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 36px;
+      border: 8px double #0284c7;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+    }
+
+    .cert-card h2 {
+      font-size: 1.8rem;
+      color: #0369a1;
+      margin-bottom: 8px;
+    }
+
+    .cert-name-input {
+      border: none;
+      border-bottom: 2px solid #0284c7;
+      font-size: 1.4rem;
+      font-weight: 800;
+      text-align: center;
+      color: #0f172a;
+      padding: 6px 12px;
+      margin: 14px 0;
+      width: 80%;
+      outline: none;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #certModal, #certModal * {
+        visibility: visible;
+      }
+      #certModal {
+        position: fixed;
+        inset: 0;
+        background: #fff;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-badge">CV</div>
+        <div class="brand-title">
+          <h1>CV LexiSpark <span class="tag">Smart Memory Engine</span></h1>
+          <p>Spaced Repetition • Active Recall • Dual-Coding Visuals (200 Core Words)</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-amber" id="streakFreezeBtn" title="ഒരു ദിവസം മുടങ്ങിയാൽ Streak സംരക്ഷിക്കാൻ">
+          🛡️ Streak Freeze: <span id="freezeCount">2</span>
+        </button>
+        <button class="btn btn-emerald" id="openCertBtn">
+          🎓 Certificate
+        </button>
+      </div>
+    </header>
+
+    <!-- Bento Dashboard -->
+    <section class="bento-stats">
+      <div class="stat-card">
+        <div class="stat-label">Mastered Words (മനസ്സിൽ ഉറച്ചവ)</div>
+        <div class="stat-value"><span id="masteredCount">0</span> <span style="font-size:0.95rem;color:var(--text-muted)">/ 200</span></div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" id="overallBar"></div></div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Daily Streak (തുടർച്ച)</div>
+        <div class="stat-value">🔥 <span id="streakCount">1</span> <span style="font-size:0.95rem;color:var(--text-muted)">Days</span></div>
+        <div class="stat-sub" id="streakSub">ഇന്നത്തെ 10 വാക്കുകൾ പൂർത്തിയാക്കൂ!</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Spaced Review Due (ഇന്ന് ആവർത്തിക്കേണ്ടവ)</div>
+        <div class="stat-value" style="color:var(--cyan)"><span id="dueCount">0</span> <span style="font-size:0.95rem;color:var(--text-muted)">Words</span></div>
+        <div class="stat-sub">മറക്കുന്നതിന് മുൻപ് ഓർമ്മ പുതുക്കാം</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Weak-Word Radar (കൂടുതൽ ശ്രദ്ധിക്കേണ്ടവ)</div>
+        <div class="stat-value" style="color:var(--rose)"><span id="weakCount">0</span> <span style="font-size:0.95rem;color:var(--text-muted)">Words</span></div>
+        <div class="stat-sub">തെറ്റിയ വാക്കുകൾ പ്രത്യേക പരിശീലനത്തിന്</div>
+      </div>
+    </section>
+
+    <!-- Controls & Mode Tabs -->
+    <section class="control-panel">
+      <div class="mode-tabs">
+        <button class="tab-btn active" data-mode="learn">
+          📖 1. Discover & Visual Cards
+        </button>
+        <button class="tab-btn" data-mode="practice">
+          🧠 2. Active Recall & Quiz
+        </button>
+        <button class="tab-btn" data-mode="review">
+          🔁 3. Spaced Review <span class="pill-count" id="tabDueBadge">0</span>
+        </button>
+        <button class="tab-btn" data-mode="weak">
+          🎯 4. Weak Vault <span class="pill-count" id="tabWeakBadge">0</span>
+        </button>
+      </div>
+
+      <div class="day-strip" id="dayStrip"></div>
+    </section>
+
+    <!-- Main Dynamic Workspace -->
+    <main id="workspace"></main>
+  </div>
+
+  <!-- Certificate Modal -->
+  <div class="modal-overlay" id="certModal">
+    <div class="cert-card">
+      <div style="font-size:0.85rem;font-weight:800;letter-spacing:2px;color:#0284c7;">CV LEXISPARK ACADEMY</div>
+      <h2>Certificate of Vocabulary Mastery</h2>
+      <p style="color:#475569;font-size:0.95rem;">This certifies that</p>
+      <input type="text" id="learnerName" class="cert-name-input" placeholder="നിങ്ങളുടെ പേര് ഇവിടെ ടൈപ്പ് ചെയ്യുക" value="CV Learner" />
+      <p style="color:#334155;font-size:0.98rem;margin:10px 0 18px;">
+        has actively practiced and mastered <strong id="certWordsText">0 / 200</strong> essential English words through Spaced Repetition and Active Recall.
+      </p>
+      <div style="display:flex;justify-content:space-around;font-size:0.82rem;color:#64748b;margin-top:20px;border-top:1px solid #e2e8f0;padding-top:14px;">
+        <div>Date: <strong id="certDate"></strong></div>
+        <div>XP Earned: <strong id="certXp">0 XP</strong></div>
+      </div>
+      <div class="no-print" style="margin-top:24px;display:flex;gap:10px;justify-content:center;">
+        <button class="btn btn-primary" onclick="window.print()">🖨️ Print / Save PDF</button>
+        <button class="btn" id="closeCertBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+      // Visual images for everyday objects & actions (Dual Coding)
+    const VISUAL_IMAGES = {
+      "Water": "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=640&q=75",
+      "Book": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=640&q=75",
+      "Key": "https://images.unsplash.com/photo-1582139329536-e7284fe1d6df?auto=format&fit=crop&w=640&q=75",
+      "Chair": "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=640&q=75",
+      "Phone": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=640&q=75",
+      "Bag": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=640&q=75",
+      "Window": "https://images.unsplash.com/photo-1509644851169-2acc08aa25b5?auto=format&fit=crop&w=640&q=75",
+      "Clock": "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=640&q=75",
+      "Walk": "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&w=640&q=75",
+      "Cook": "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=640&q=75",
+      "Apple": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=640&q=75",
+      "Bread": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=640&q=75",
+      "Cup": "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=640&q=75",
+      "Pen": "https://images.unsplash.com/photo-1585336261022-680e295ce3fe?auto=format&fit=crop&w=640&q=75",
+      "Table": "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&w=640&q=75",
+      "Car": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=640&q=75",
+      "Run": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=640&q=75",
+      "Read": "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=640&q=75"
+    };
+
+    // Days 1-10: Everyday Objects, Actions & Simple Conversation Words
+    // Days 11-20: Descriptions (Adjectives) & Higher-level Expressions
+    const RAW_WORDS = [
+      // Day 1: Daily Objects (വസ്തുക്കളുടെ പേരുകൾ)
+      ["Water", "Noun", "വെള്ളം", "Please give me a glass of water.", "ദയവായി എനിക്ക് ഒരു ഗ്ലാസ് വെള്ളം തരൂ."],
+      ["Book", "Noun", "പുസ്തകം", "I read a book before sleeping.", "ഉറങ്ങുന്നതിന് മുൻപ് ഞാൻ ഒരു പുസ്തകം വായിക്കും."],
+      ["Key", "Noun", "താക്കോൽ", "Did you keep the room key?", "റൂമിന്റെ താക്കോൽ നിങ്ങൾ എവിടെയാണ് വെച്ചത്?"],
+      ["Chair", "Noun", "കസേര", "Please sit on this chair.", "ദയവായി ഈ കസേരയിൽ ഇരിക്കൂ."],
+      ["Phone", "Noun", "ഫോൺ", "My phone battery is low.", "എന്റെ ഫോണിന്റെ ബാറ്ററി കുറവാണ്."],
+      ["Bag", "Noun", "ബാഗ്", "Keep your notebook inside the bag.", "നോട്ട്ബുക്ക് ബാഗിനുള്ളിൽ വെക്കുക."],
+      ["Window", "Noun", "ജനൽ", "Open the window for fresh air.", "ശുദ്ധവായുവിനായി ജനൽ തുറക്കുക."],
+      ["Clock", "Noun", "ക്ലോക്ക് / ഘടികാരം", "Look at the wall clock.", "ചുമരിലെ ക്ലോക്കിലേക്ക് നോക്കുക."],
+      ["Door", "Noun", "വാതിൽ", "Close the door gently.", "വാതിൽ പതുക്കെ അടയ്ക്കുക."],
+      ["Money", "Noun", "പണം", "Save a little money every week.", "എല്ലാ ആഴ്ചയും കുറച്ച് പണം സൂക്ഷിക്കുക."],
+
+      // Day 2: More Everyday Things & Food/Home Items
+      ["Apple", "Noun", "ആപ്പിൾ", "Eat a fresh apple in the morning.", "രാവിലെ നല്ലൊരു ആപ്പിൾ കഴിക്കുക."],
+      ["Bread", "Noun", "ബ്രെഡ് / റൊട്ടി", "We bought bread and milk today.", "ഇന്ന് ഞങ്ങൾ ബ്രെഡും പാലും വാങ്ങി."],
+      ["Cup", "Noun", "കപ്പ്", "Pour tea into the cup.", "കപ്പിലേക്ക് ചായ ഒഴിക്കുക."],
+      ["Pen", "Noun", "പേന", "I need a blue pen to sign.", "ഒപ്പിടാൻ എനിക്ക് ഒരു നീല പേന വേണം."],
+      ["Table", "Noun", "മേശ", "Put the files on the table.", "ഫയലുകൾ മേശപ്പുറത്ത് വെക്കുക."],
+      ["Car", "Noun", "കാർ", "They went to town by car.", "അവർ കാറിൽ ടൗണിലേക്ക് പോയി."],
+      ["Road", "Noun", "റോഡ്", "Cross the road carefully.", "റോഡ് ശ്രദ്ധിച്ച് കടക്കുക."],
+      ["House", "Noun", "വീട്", "Our house is near the market.", "ഞങ്ങളുടെ വീട് മാർക്കറ്റിന് അടുത്താണ്."],
+      ["Shirt", "Noun", "ഷർട്ട്", "This cotton shirt is very comfortable.", "ഈ കോട്ടൺ ഷർട്ട് വളരെ സുഖകരമാണ്."],
+      ["Shoe", "Noun", "ഷൂ / ചെരുപ്പ്", "Take off your shoes outside.", "ഷൂ പുറത്ത് അഴിച്ചുവെക്കുക."],
+
+      // Day 3: Common Daily Actions (നിത്യേന ചെയ്യുന്ന പ്രവർത്തികൾ)
+      ["Walk", "Verb", "നടക്കുക", "I walk for twenty minutes every evening.", "എല്ലാ വൈകുന്നേരവും ഞാൻ ഇരുപത് മിനിറ്റ് നടക്കും."],
+      ["Run", "Verb", "ഓടുക", "He runs fast in the morning.", "രാവിലെ അവൻ വേഗത്തിൽ ഓടും."],
+      ["Read", "Verb", "വായിക്കുക", "Read the instructions carefully.", "നിർദ്ദേശങ്ങൾ ശ്രദ്ധാപൂർവ്വം വായിക്കുക."],
+      ["Write", "Verb", "എഴുതുക", "Write down the important points.", "പ്രധാന കാര്യങ്ങൾ എഴുതിവെക്കുക."],
+      ["Speak", "Verb", "സംസാരിക്കുക", "Try to speak English a little every day.", "എല്ലാ ദിവസവും കുറച്ചെങ്കിലും ഇംഗ്ലീഷ് സംസാരിക്കാൻ ശ്രമിക്കുക."],
+      ["Listen", "Verb", "ശ്രദ്ധിച്ചു കേൾക്കുക", "Listen to the audio carefully.", "ഓഡിയോ ശ്രദ്ധിച്ചു കേൾക്കുക."],
+      ["Cook", "Verb", "പാചകം ചെയ്യുക", "Who will cook dinner tonight?", "ഇന്ന് രാത്രി ആരാണ് ഭക്ഷണം പാചകം ചെയ്യുന്നത്?"],
+      ["Clean", "Verb", "വൃത്തിയാക്കുക", "Let us clean the room together.", "നമുക്ക് മുറി ഒരുമിച്ച് വൃത്തിയാക്കാം."],
+      ["Open", "Verb", "തുറക്കുക", "Open the shop at nine in the morning.", "രാവിലെ ഒൻപത് മണിക്ക് കട തുറക്കുക."],
+      ["Close", "Verb", "അടയ്ക്കുക", "Please close the shop at eight.", "ദയവായി എട്ട് മണിക്ക് കട അടയ്ക്കുക."],
+
+      // Day 4: More Action Verbs in Daily Life
+      ["Buy", "Verb", "വാങ്ങുക", "I want to buy a new umbrella.", "എനിക്ക് പുതിയൊരു കുട വാങ്ങണം."],
+      ["Sell", "Verb", "വിൽക്കുക", "They sell fresh fruits here.", "ഇവിടെ അവർ പുതിയ പഴങ്ങൾ വിൽക്കുന്നു."],
+      ["Give", "Verb", "കൊടുക്കുക", "Give me five minutes, please.", "ദയവായി എനിക്ക് അഞ്ച് മിനിറ്റ് തരൂ."],
+      ["Take", "Verb", "എടുക്കുക", "Take your umbrella before going out.", "പുറത്തുപോകുന്നതിന് മുൻപ് കുട എടുക്കുക."],
+      ["Ask", "Verb", "ചോദിക്കുക", "Do not hesitate to ask for help.", "സഹായം ചോദിക്കാൻ മടിക്കരുത്."],
+      ["Answer", "Verb", "ഉത്തരം പറയുക", "Answer the question clearly.", "ചോദ്യത്തിന് വ്യക്തമായി ഉത്തരം പറയുക."],
+      ["Wait", "Verb", "കാത്തിരിക്കുക", "Wait here for two minutes.", "രണ്ട് മിനിറ്റ് ഇവിടെ കാത്തിരിക്കൂ."],
+      ["Help", "Verb", "സഹായിക്കുക", "Can you help me carry this box?", "ഈ പെട്ടി എടുക്കാൻ എന്നെ സഹായിക്കാമോ?"],
+      ["Start", "Verb", "തുടങ്ങുക", "Let us start the class now.", "നമുക്ക് ഇപ്പോൾ ക്ലാസ്സ് തുടങ്ങാം."],
+      ["Finish", "Verb", "പൂർത്തിയാക്കുക", "I will finish this work soon.", "ഞാൻ ഈ ജോലി വേഗം പൂർത്തിയാക്കാം."],
+
+      // Day 5: Everyday Conversation Verbs
+      ["Think", "Verb", "ചിന്തിക്കുക", "Think before you make a decision.", "തീരുമാനം എടുക്കുന്നതിന് മുൻപ് ചിന്തിക്കുക."],
+      ["Know", "Verb", "അറിയുക", "Do you know his phone number?", "നിങ്ങൾക്ക് അവന്റെ ഫോൺ നമ്പർ അറിയാമോ?"],
+      ["Understand", "Verb", "മനസ്സിലാക്കുക", "I understand what you mean.", "നിങ്ങൾ ഉദ്ദേശിച്ചത് എനിക്ക് മനസ്സിലാകുന്നുണ്ട്."],
+      ["Remember", "Verb", "ഓർമ്മിക്കുക", "I cannot remember where I kept it.", "ഞാൻ അത് എവിടെയാണ് വെച്ചതെന്ന് ഓർമ്മ വരുന്നില്ല."],
+      ["Forget", "Verb", "മറക്കുക", "Do not forget to lock the gate.", "ഗേറ്റ് പൂട്ടാൻ മറക്കരുത്."],
+      ["Need", "Verb", "ആവശ്യമുണ്ടാകുക", "I need some quiet time to study.", "പഠിക്കാൻ എനിക്ക് കുറച്ച് ശാന്തമായ സമയം ആവശ്യമാണ്."],
+      ["Want", "Verb", "ആഗ്രഹിക്കുക / വേണമെന്നുണ്ടാകുക", "What do you want for breakfast?", "പ്രാതലിന് നിങ്ങൾക്ക് എന്താണ് വേണ്ടത്?"],
+      ["Try", "Verb", "ശ്രമിക്കുക", "Try again, you will get it right.", "വീണ്ടും ശ്രമിക്കുക, നിങ്ങൾക്ക് ശരിയാകും."],
+      ["Find", "Verb", "കണ്ടെത്തുക", "Did you find your lost pen?", "നഷ്ടപ്പെട്ട പേന നിങ്ങൾ കണ്ടെത്തിയോ?"],
+      ["Keep", "Verb", "സൂക്ഷിക്കുക / വെക്കുക", "Keep your documents in a safe place.", "രേഖകൾ സുരക്ഷിതമായ സ്ഥലത്ത് സൂക്ഷിക്കുക."],
+
+      // Day 6: Places & Travel Words
+      ["Market", "Noun", "മാർക്കറ്റ് / ചന്ത", "I am going to the market.", "ഞാൻ മാർക്കറ്റിലേക്ക് പോകുകയാണ്."],
+      ["School", "Noun", "സ്കൂൾ / വിദ്യാലയം", "The children go to school at eight.", "കുട്ടികൾ എട്ട് മണിക്ക് സ്കൂളിലേക്ക് പോകും."],
+      ["Office", "Noun", "ഓഫീസ്", "She reached the office on time.", "അവൾ കൃത്യസമയത്ത് ഓഫീസിൽ എത്തി."],
+      ["Hospital", "Noun", "ആശുപത്രി", "The hospital is two kilometers away.", "ആശുപത്രി രണ്ട് കിലോമീറ്റർ അകലെയാണ്."],
+      ["Station", "Noun", "സ്റ്റേഷൻ", "Let us meet at the bus station.", "നമുക്ക് ബസ് സ്റ്റേഷനിൽ വെച്ച് കാണാം."],
+      ["Street", "Noun", "തെരുവ് / വഴി", "There are many shops on this street.", "ഈ വഴിയിൽ ധാരാളം കടകളുണ്ട്."],
+      ["Village", "Noun", "ഗ്രാമം", "He lives in a quiet village.", "അവൻ ശാന്തമായ ഒരു ഗ്രാമത്തിലാണ് താമസിക്കുന്നത്."],
+      ["City", "Noun", "നഗരം", "The city is busy during morning hours.", "രാവിലത്തെ സമയത്ത് നഗരത്തിൽ നല്ല തിരക്കായിരിക്കും."],
+      ["Room", "Noun", "മുറി", "Please wait in the next room.", "ദയവായി അടുത്ത മുറിയിൽ കാത്തിരിക്കൂ."],
+      ["Garden", "Noun", "തോട്ടം", "We sit in the garden in the evening.", "വൈകുന്നേരം ഞങ്ങൾ തോട്ടത്തിൽ ഇരിക്കും."],
+
+      // Day 7: Time & Routine Words
+      ["Morning", "Noun", "രാവിലെ / പ്രഭാതം", "I drink warm water every morning.", "എല്ലാ ദിവസവും രാവിലെ ഞാൻ ചെറുചൂടുവെള്ളം കുടിക്കും."],
+      ["Afternoon", "Noun", "ഉച്ചതിരിഞ്ഞ്", "We have a meeting this afternoon.", "ഇന്ന് ഉച്ചതിരിഞ്ഞ് ഞങ്ങൾക്ക് ഒരു മീറ്റിംഗ് ഉണ്ട്."],
+      ["Evening", "Noun", "വൈകുന്നേരം", "Call me in the evening.", "വൈകുന്നേരം എന്നെ വിളിക്കുക."],
+      ["Night", "Noun", "രാത്രി", "Try to sleep early at night.", "രാത്രി നേരത്തെ ഉറങ്ങാൻ ശ്രമിക്കുക."],
+      ["Today", "Noun", "ഇന്ന്", "Today is a good day to start.", "ഇന്ന് തുടങ്ങാൻ നല്ല ദിവസമാണ്."],
+      ["Tomorrow", "Noun", "നാളെ", "We will check this tomorrow.", "നമുക്ക് ഇത് നാളെ പരിശോധിക്കാം."],
+      ["Yesterday", "Noun", "ഇന്നലെ", "I met him yesterday evening.", "ഇന്നലെ വൈകുന്നേരം ഞാൻ അവനെ കണ്ടു."],
+      ["Week", "Noun", "ആഴ്ച", "Practice these words for one week.", "ഈ വാക്കുകൾ ഒരാഴ്ച പരിശീലിക്കുക."],
+      ["Month", "Noun", "മാസം", "One month of daily practice brings big change.", "ഒരു മാസത്തെ ദിവസേനയുള്ള പരിശീലനം വലിയ മാറ്റം കൊണ്ടുവരും."],
+      ["Time", "Noun", "സമയം", "We do not have much time left.", "നമുക്ക് അധികം സമയം ബാക്കിയില്ല."],
+
+      // Day 8: People, Family & Daily Roles
+      ["Friend", "Noun", "സുഹൃത്ത്", "A good friend supports you in tough times.", "പ്രയാസഘട്ടങ്ങളിൽ നല്ലൊരു സുഹൃത്ത് കൂടെ നിൽക്കും."],
+      ["Teacher", "Noun", "അധ്യാപകൻ / അധ്യാപിക", "The teacher explained the lesson clearly.", "അധ്യാപകൻ പാഠം വ്യക്തമായി വിശദീകരിച്ചു."],
+      ["Student", "Noun", "വിദ്യാർത്ഥി", "Every student has their own pace.", "ഓരോ വിദ്യാർത്ഥിക്കും അവരവരുടേതായ വേഗതയുണ്ട്."],
+      ["Family", "Noun", "കുടുംബം", "We have dinner together as a family.", "ഞങ്ങൾ കുടുംബമായി ഒരുമിച്ച് അത്താഴം കഴിക്കും."],
+      ["Neighbor", "Noun", "അയൽവാസി", "Our neighbor is very helpful.", "ഞങ്ങളുടെ അയൽവാസി വളരെ സഹായമനസ്കനാണ്."],
+      ["Customer", "Noun", "ഉപഭോക്താവ്", "Treat every customer with respect.", "ഓരോ ഉപഭോക്താവിനെയും ബഹുമാനത്തോടെ പെരുമാറുക."],
+      ["Guest", "Noun", "അതിഥി", "We welcomed the guests warmly.", "ഞങ്ങൾ അതിഥികളെ സ്നേഹത്തോടെ സ്വീകരിച്ചു."],
+      ["Worker", "Noun", "തൊഴിലാളി / ജോലിക്കാരൻ", "Each worker plays an important role.", "ഓരോ തൊഴിലാളിക്കും പ്രധാന പങ്കുണ്ട്."],
+      ["Doctor", "Noun", "ഡോക്ടർ", "Consult a doctor if the fever continues.", "പനി തുടരുകയാണെങ്കിൽ ഒരു ഡോക്ടറെ കാണുക."],
+      ["Driver", "Noun", "ഡ്രൈവർ", "The bus driver stopped at the signal.", "ബസ് ഡ്രൈവർ സിഗ്നലിൽ വാഹനം നിർത്തി."],
+
+      // Day 9: Everyday Feelings & Simple States
+      ["Happy", "Adj", "സന്തോഷമുള്ള", "I feel happy when I learn something new.", "പുതിയ കാര്യങ്ങൾ പഠിക്കുമ്പോൾ എനിക്ക് സന്തോഷം തോന്നും."],
+      ["Tired", "Adj", "ക്ഷീണമുള്ള", "I am tired after a long day.", "നീണ്ട ദിവസത്തിന് ശേഷം എനിക്ക് ക്ഷീണമുണ്ട്."],
+      ["Busy", "Adj", "തിരക്കുള്ള", "I am busy right now, I will call later.", "ഞാൻ ഇപ്പോൾ തിരക്കിലാണ്, പിന്നീട് വിളിക്കാം."],
+      ["Ready", "Adj", "തയ്യാറായ", "Are you ready for today's quiz?", "ഇന്നത്തെ ക്വിസിന് നിങ്ങൾ തയ്യാറാണോ?"],
+      ["Hungry", "Adj", "വിശക്കുന്ന", "I am hungry, let us eat lunch.", "എനിക്ക് വിശക്കുന്നുണ്ട്, നമുക്ക് ഉച്ചഭക്ഷണം കഴിക്കാം."],
+      ["Afraid", "Adj", "ഭയമുള്ള / പേടിയുള്ള", "Do not be afraid of making mistakes.", "തെറ്റുകൾ വരുത്തുന്നതിൽ ഭയപ്പെടേണ്ട."],
+      ["Sure", "Adj", "ഉറപ്പുള്ള", "Are you sure about this answer?", "ഈ ഉത്തരത്തെക്കുറിച്ച് നിങ്ങൾക്ക് ഉറപ്പാണോ?"],
+      ["Free", "Adj", "ഒഴിവുള്ള / സൗജന്യമായ", "Are you free this evening?", "ഇന്ന് വൈകുന്നേരം നിങ്ങൾക്ക് ഒഴിവുണ്ടോ?"],
+      ["Late", "Adj", "വൈകിയ", "Sorry, I am a little late today.", "ക്ഷമിക്കണം, ഇന്ന് ഞാൻ കുറച്ച് വൈകിപ്പോയി."],
+      ["Early", "Adj", "നേരത്തെയുള്ള / അതിരാവിലെയുള്ള", "Wake up early to study peacefully.", "ശാന്തമായി പഠിക്കാൻ അതിരാവിലെ എഴുന്നേൽക്കുക."],
+
+      // Day 10: Everyday Useful Words & Phrases Base
+      ["Easy", "Adj", "എളുപ്പമുള്ള", "Daily ten words is an easy target.", "ദിവസവും പത്ത് വാക്കുകൾ എന്നത് എളുപ്പമുള്ള ലക്ഷ്യമാണ്."],
+      ["Hard", "Adj", "കഠിനമായ / ബുദ്ധിമുട്ടുള്ള", "Nothing is hard when you practice daily.", "ദിവസവും പരിശീലിക്കുമ്പോൾ ഒന്നും ബുദ്ധിമുട്ടുള്ളതല്ല."],
+      ["Right", "Adj", "ശരിയായ / വലതുവശം", "You chose the right word.", "നിങ്ങൾ ശരിയായ വാക്കാണ് തിരഞ്ഞെടുത്തത്."],
+      ["Wrong", "Adj", "തെറ്റായ", "It is okay to get a word wrong.", "ഒരു വാക്ക് തെറ്റുന്നതിൽ കുഴപ്പമില്ല."],
+      ["New", "Adj", "പുതിയ", "Learn ten new words every day.", "എല്ലാ ദിവസവും പത്ത് പുതിയ വാക്കുകൾ പഠിക്കുക."],
+      ["Old", "Adj", "പഴയ / പ്രായമായ", "Review old words so you do not forget.", "മറക്കാതിരിക്കാൻ പഴയ വാക്കുകൾ ആവർത്തിക്കുക."],
+      ["Important", "Adj", "പ്രധാനപ്പെട്ട", "Consistency is the most important habit.", "തുടർച്ചയാണ് ഏറ്റവും പ്രധാനപ്പെട്ട ശീലം."],
+      ["Possible", "Adj", "സാധ്യമായ", "Fluency is possible with regular practice.", "പതിവായ പരിശീലനത്തിലൂടെ ഭാഷാപ്രാവീണ്യം സാധ്യമാണ്."],
+      ["Safe", "Adj", "സുരക്ഷിതമായ", "Reach home safe before dark.", "ഇരുട്ടാകുന്നതിന് മുൻപ് സുരക്ഷിതമായി വീട്ടിൽ എത്തുക."],
+      ["Simple", "Adj", "ലളിതമായ", "Keep your sentences simple and clear.", "നിങ്ങളുടെ വാക്യങ്ങൾ ലളിതവും വ്യക്തവുമായി സൂക്ഷിക്കുക."],
+
+      // Day 11: Descriptions & Qualities (വിശേഷണങ്ങൾ - ഘട്ടം 2)
+      ["Clear", "Adj", "വ്യക്തമായ", "Give a clear reason for your choice.", "നിങ്ങളുടെ തിരഞ്ഞെടുപ്പിന് വ്യക്തമായ കാരണം നൽകുക."],
+      ["Polite", "Adj", "മര്യാദയുള്ള / വിനയമുള്ള", "Always use polite words when speaking.", "സംസാരിക്കുമ്പോൾ എപ്പോഴും മര്യാദയുള്ള വാക്കുകൾ ഉപയോഗിക്കുക."],
+      ["Honest", "Adj", "സത്യസന്ധനായ", "An honest person earns lasting trust.", "സത്യസന്ധനായ വ്യക്തിക്ക് എന്നെന്നും വിശ്വാസ്യത ലഭിക്കും."],
+      ["Patient", "Adj", "ക്ഷമയുള്ള", "Be patient with yourself while learning.", "പഠിക്കുമ്പോൾ നിങ്ങളോട് തന്നെ ക്ഷമ കാണിക്കുക."],
+      ["Careful", "Adj", "ശ്രദ്ധയുള്ള / കരുതലുള്ള", "Be careful with spelling in Stage 2.", "രണ്ടാം ഘട്ടത്തിൽ സ്പെല്ലിംഗിൽ ശ്രദ്ധാലുവായിരിക്കുക."],
+      ["Helpful", "Adj", "സഹായകരമായ", "Example sentences are very helpful.", "ഉദാഹരണ വാക്യങ്ങൾ വളരെ സഹായകരമാണ്."],
+      ["Quiet", "Adj", "ശാന്തമായ / നിശബ്ദമായ", "A quiet place helps you focus better.", "ശാന്തമായ ഇടം കൂടുതൽ ശ്രദ്ധ കേന്ദ്രീകരിക്കാൻ സഹായിക്കും."],
+      ["Clean", "Adj", "വൃത്തിയുള്ള", "A clean design is pleasant to use.", "വൃത്തിയുള്ള ഡിസൈൻ ഉപയോഗിക്കാൻ സുഖകരമാണ്."],
+      ["Strong", "Adj", "ശക്തമായ", "Your memory grows strong with recall.", "ഓർത്തെടുക്കലിലൂടെ നിങ്ങളുടെ ഓർമ്മശക്തി ശക്തമാകും."],
+      ["Gentle", "Adj", "സൗമ്യമായ / മൃദുവായ", "Speak in a calm and gentle tone.", "ശാന്തവും സൗമ്യവുമായ സ്വരത്തിൽ സംസാരിക്കുക."],
+
+      // Day 12: More Everyday Descriptions
+      ["Bright", "Adj", "പ്രകാശമുള്ള / തിളക്കമുള്ള", "The room is bright in the morning.", "രാവിലെ മുറിയിൽ നല്ല വെളിച്ചമായിരിക്കും."],
+      ["Dark", "Adj", "ഇരുണ്ട / ഇരുട്ടുള്ള", "It gets dark quickly after six.", "ആറ് മണിക്ക് ശേഷം വേഗം ഇരുട്ടാകും."],
+      ["Heavy", "Adj", "ഭാരമുള്ള", "This bag is too heavy to carry alone.", "ഈ ബാഗ് ഒറ്റയ്ക്ക് കൊണ്ടുപോകാൻ വളരെ ഭാരമുള്ളതാണ്."],
+      ["Light", "Adj", "ഭാരം കുറഞ്ഞ / വെളിച്ചം", "Carry a light bag for daily travel.", "ദിവസേനയുള്ള യാത്രയ്ക്ക് ഭാരം കുറഞ്ഞ ബാഗ് എടുക്കുക."],
+      ["Sharp", "Adj", "കൂർമ്മതയുള്ള / മൂർച്ചയുള്ള", "Practice keeps your mind sharp.", "പരിശീലനം മനസ്സിനെ കൂർമ്മതയുള്ളതാക്കി നിലനിർത്തും."],
+      ["Smooth", "Adj", "മിനുസമുള്ള / തടസ്സമില്ലാത്ത", "Daily review makes speaking smooth.", "ദിവസേനയുള്ള റിവിഷൻ സംസാരം ഒഴുക്കുള്ളതാക്കും."],
+      ["Sudden", "Adj", "പെട്ടെന്നുള്ള", "There was a sudden change in plan.", "പദ്ധതിയിൽ പെട്ടെന്നൊരു മാറ്റം വന്നു."],
+      ["Common", "Adj", "സാധാരണയായി കാണുന്ന / പൊതുവായ", "These are common words in daily talk.", "നിത്യസംസാരത്തിൽ സാധാരണയായി വരുന്ന വാക്കുകളാണിവ."],
+      ["Useful", "Adj", "പ്രയോജനകരമായ", "Learn words that are useful in real life.", "യഥാർത്ഥ ജീവിതത്തിൽ ഉപകാരപ്പെടുന്ന വാക്കുകൾ പഠിക്കുക."],
+      ["Popular", "Adj", "ജനപ്രിയമായ", "Short daily lessons are very popular.", "ചെറിയ ദൈനംദിന പാഠങ്ങൾ വളരെ ജനപ്രിയമാണ്."],
+
+      // Day 13: Work & Practical Expressions
+      ["Plan", "Noun", "പദ്ധതി / ആസൂത്രണം", "A clear plan makes learning stress-free.", "വ്യക്തമായ ഒരു പദ്ധതി പഠനം എളുപ്പമാക്കും."],
+      ["Goal", "Noun", "ലക്ഷ്യം", "Set a small goal for today.", "ഇന്നത്തേക്ക് ചെറിയൊരു ലക്ഷ്യം നിശ്ചയിക്കുക."],
+      ["Habit", "Noun", "ശീലം", "Good habits shape your future.", "നല്ല ശീലങ്ങൾ നിങ്ങളുടെ ഭാവി രൂപപ്പെടുത്തും."],
+      ["Reason", "Noun", "കാരണം", "Tell me the reason for the delay.", "താമസത്തിന്റെ കാരണം പറയുക."],
+      ["Result", "Noun", "ഫലം", "Steady effort gives steady results.", "സ്ഥിരമായ പ്രയത്നം കൃത്യമായ ഫലം നൽകും."],
+      ["Choice", "Noun", "തിരഞ്ഞെടുപ്പ്", "Making a good choice saves time.", "നല്ലൊരു തിരഞ്ഞെടുപ്പ് സമയം ലാഭിക്കും."],
+      ["Chance", "Noun", "അവസരം", "Do not miss a chance to practice.", "പരിശീലിക്കാനുള്ള അവസരം നഷ്ടപ്പെടുത്തരുത്."],
+      ["Advice", "Noun", "ഉപദേശം", "Follow practical advice that works.", "ഫലപ്രദമായ പ്രായോഗിക ഉപദേശങ്ങൾ പിന്തുടരുക."],
+      ["Mistake", "Noun", "തെറ്റ് / പിഴവ്", "Every mistake teaches you something.", "ഓരോ തെറ്റും നിങ്ങൾക്ക് എന്തെങ്കിലും പഠിപ്പിക്കും."],
+      ["Progress", "Noun", "പുരോഗതി", "Track your progress every single day.", "ഓരോ ദിവസവും നിങ്ങളുടെ പുരോഗതി ശ്രദ്ധിക്കുക."],
+
+      // Day 14: Useful Everyday Verbs (Intermediate-Simple)
+      ["Improve", "Verb", "മെച്ചപ്പെടുത്തുക", "Reviewing weak words will improve recall.", "പ്രയാസമുള്ള വാക്കുകൾ ആവർത്തിക്കുന്നത് ഓർമ്മ മെച്ചപ്പെടുത്തും."],
+      ["Notice", "Verb", "ശ്രദ്ധിക്കുക / അറിയുക", "Notice how the word is used in context.", "സന്ദർഭത്തിൽ ആ വാക്ക് എങ്ങനെയാണ് ഉപയോഗിച്ചിരിക്കുന്നതെന്ന് ശ്രദ്ധിക്കുക."],
+      ["Decide", "Verb", "തീരുമാനിക്കുക", "Decide your study time for the day.", "ദിവസത്തെ പഠനസമയം തീരുമാനിക്കുക."],
+      ["Explain", "Verb", "വിശദീകരിക്കുക", "Can you explain this in simple words?", "ഇത് ലളിതമായ വാക്കുകളിൽ വിശദീകരിക്കാമോ?"],
+      ["Compare", "Verb", "താരതമ്യം ചെയ്യുക", "Compare your score with last week.", "കഴിഞ്ഞ ആഴ്ചയുമായി നിങ്ങളുടെ സ്കോർ താരതമ്യം ചെയ്യുക."],
+      ["Connect", "Verb", "ബന്ധിപ്പിക്കുക", "Connect new words with real pictures.", "പുതിയ വാക്കുകളെ യഥാർത്ഥ ചിത്രങ്ങളുമായി ബന്ധിപ്പിക്കുക."],
+      ["Suggest", "Verb", "നിർദ്ദേശിക്കുക", "Can you suggest a better time to meet?", "കാണാൻ പറ്റിയ നല്ലൊരു സമയം നിർദ്ദേശിക്കാമോ?"],
+      ["Agree", "Verb", "സമ്മതിക്കുക / യോജിക്കുക", "I agree that daily practice matters most.", "ദിവസേനയുള്ള പരിശീലനമാണ് ഏറ്റവും പ്രധാനമെന്ന് ഞാൻ സമ്മതിക്കുന്നു."],
+      ["Refuse", "Verb", "നിരസിക്കുക / വേണ്ടെന്ന് പറയുക", "Politely refuse tasks you cannot do.", "ചെയ്യാൻ കഴിയാത്ത കാര്യങ്ങൾ മര്യാദയോടെ നിരസിക്കുക."],
+      ["Support", "Verb", "പിന്തുണയ്ക്കുക", "Small wins support big achievements.", "ചെറിയ വിജയങ്ങൾ വലിയ നേട്ടങ്ങളെ പിന്തുണയ്ക്കും."],
+
+      // Day 15: Emotions & Reactions (Describing Feelings)
+      ["Calm", "Adj", "ശാന്തമായ", "Stay calm during tests and quizzes.", "പരീക്ഷകളിലും ക്വിസുകളിലും ശാന്തമായിരിക്കുക."],
+      ["Confident", "Adj", "ആത്മവിശ്വാസമുള്ള", "You will feel more confident after Day 10.", "പത്താം ദിവസത്തിന് ശേഷം നിങ്ങൾക്ക് കൂടുതൽ ആത്മവിശ്വാസം തോന്നും."],
+      ["Curious", "Adj", "അറിയാൻ ആകാംക്ഷയുള്ള", "Stay curious about how words work.", "വാക്കുകൾ എങ്ങനെ പ്രവർത്തിക്കുന്നു എന്നതിൽ ആകാംക്ഷ നിലനിർത്തുക."],
+      ["Grateful", "Adj", "നന്ദിയുള്ള / കടപ്പാടുള്ള", "I am grateful for every small step forward.", "മുന്നോട്ടുള്ള ഓരോ ചെറിയ ചുവടിനും ഞാൻ നന്ദിയുള്ളവനാണ്."],
+      ["Proud", "Adj", "അഭിമാനമുള്ള", "Be proud of your daily streak.", "നിങ്ങളുടെ ദൈനംദിന സ്ട്രീക്കിൽ അഭിമാനിക്കുക."],
+      ["Surprised", "Adj", "അത്ഭുതപ്പെട്ട", "You will be surprised how much you remember.", "നിങ്ങൾ എത്രത്തോളം ഓർക്കുന്നു എന്നോർത്ത് നിങ്ങൾ അത്ഭുതപ്പെടും."],
+      ["Worried", "Adj", "ആകുലപ്പെട്ട / വിഷമമുള്ള", "Do not feel worried if a word feels tough.", "ഒരു വാക്ക് പ്രയാസമായി തോന്നിയാലും വിഷമിക്കേണ്ട."],
+      ["Excited", "Adj", "ആവേശമുള്ള", "I am excited to reach the next milestone.", "അടുത്ത നാഴികക്കല്ലിൽ എത്താൻ ഞാൻ ആവേശത്തിലാണ്."],
+      ["Relaxed", "Adj", "റിലാക്സ്ഡ് / അയഞ്ഞ", "A relaxed mind learns faster.", "ശാന്തവും അയഞ്ഞതുമായ മനസ്സ് വേഗം പഠിക്കും."],
+      ["Focused", "Adj", "ശ്രദ്ധ കേന്ദ്രീകരിച്ച", "Stay focused for just five minutes.", "വെറും അഞ്ച് മിനിറ്റ് ശ്രദ്ധ കേന്ദ്രീകരിക്കുക."],
+
+      // Day 16: Describing Situations & Things
+      ["Accurate", "Adj", "കൃത്യമായ", "Accurate spelling matters in writing.", "എഴുത്തിൽ കൃത്യമായ സ്പെല്ലിംഗ് പ്രധാനമാണ്."],
+      ["Practical", "Adj", "പ്രായോഗികമായ", "Practical words help in daily conversation.", "പ്രായോഗിക വാക്കുകൾ നിത്യസംസാരത്തിൽ സഹായിക്കും."],
+      ["Reliable", "Adj", "വിശ്വസനീയമായ", "Build a reliable routine you can keep.", "തുടരാൻ കഴിയുന്ന വിശ്വസനീയമായ ഒരു ശീലം ഉണ്ടാക്കുക."],
+      ["Relevant", "Adj", "പ്രസക്തമായ / അനുയോജ്യമായ", "Focus on words relevant to your daily life.", "നിത്യജീവിതത്തിന് അനുയോജ്യമായ വാക്കുകളിൽ ശ്രദ്ധ കേന്ദ്രീകരിക്കുക."],
+      ["Obvious", "Adj", "വ്യക്തമായ / എളുപ്പം മനസ്സിലാകുന്ന", "The meaning is obvious from the example.", "ഉദാഹരണത്തിൽ നിന്ന് അർത്ഥം വ്യക്തമാണ്."],
+      ["Frequent", "Adj", "ഇടയ്ക്കിടെ സംഭവിക്കുന്ന / പതിവായ", "Frequent review stops forgetting.", "പതിവായ ആവർത്തനം മറവി തടയും."],
+      ["Rare", "Adj", "അപൂർവ്വമായ", "Rare words are fun after basics are strong.", "അടിസ്ഥാനം ഉറച്ചതിന് ശേഷം അപൂർവ്വ വാക്കുകൾ രസകരമാകും."],
+      ["Flexible", "Adj", "വഴക്കമുള്ള / മാറ്റാൻ കഴിയുന്ന", "A flexible schedule fits busy days.", "തിരക്കുള്ള ദിവസങ്ങൾക്ക് അനുയോജ്യമായ സമയക്രമം നല്ലതാണ്."],
+      ["Effective", "Adj", "ഫലപ്രദമായ", "Active recall is an effective study method.", "ഓർത്തെടുക്കൽ പരിശീലനം ഫലപ്രദമായ പഠനരീതിയാണ്."],
+      ["Valuable", "Adj", "വിലപ്പെട്ട", "Your time and attention are valuable.", "നിങ്ങളുടെ സമയവും ശ്രദ്ധയും വിലപ്പെട്ടതാണ്."],
+
+      // Day 17: Higher-Level Descriptions (ഘട്ടം 2 - അവസാന ഭാഗം)
+      ["Ambitious", "Adj", "വലിയ ലക്ഷ്യങ്ങളുള്ള / महत्वाकांक्षी", "An ambitious learner sets clear monthly targets.", "വലിയ ലക്ഷ്യങ്ങളുള്ള പഠിതാവ് വ്യക്തമായ മാസലക്ഷ്യങ്ങൾ വെക്കും."],
+      ["Consistent", "Adj", "തുടർച്ചയുള്ള / സ്ഥിരതയുള്ള", "Consistent effort beats occasional cramming.", "ഇടയ്ക്കിടെയുള്ള കഠിനപരിശ്രമത്തേക്കാൾ മികച്ചത് സ്ഥിരതയാണ്."],
+      ["Resourceful", "Adj", "ബുദ്ധിപരമായി പരിഹാരം കാണുന്ന", "Resourceful learners use every tool well.", "ഓരോ സൗകര്യവും നന്നായി ഉപയോഗിക്കുന്നവരാണ് സമർത്ഥർ."],
+      ["Thorough", "Adj", "പൂർണ്ണവും സൂക്ഷ്മവുമായ", "Do a thorough check before finishing.", "പൂർത്തിയാക്കുന്നതിന് മുൻപ് പൂർണ്ണമായി പരിശോധിക്കുക."],
+      ["Sincere", "Adj", "ആത്മാർത്ഥമായ", "Sincere practice always shows results.", "ആത്മാർത്ഥമായ പരിശീലനം എപ്പോഴും ഫലം കാണിക്കും."],
+      ["Thoughtful", "Adj", "കരുതലുള്ള / ആഴത്തിൽ ചിന്തിക്കുന്ന", "A thoughtful reply builds goodwill.", "ആഴത്തിൽ ചിന്തിച്ചുള്ള മറുപടി നല്ല ബന്ധങ്ങൾ ഉണ്ടാക്കും."],
+      ["Adaptable", "Adj", "മാറ്റങ്ങളോട് വേഗം പൊരുത്തപ്പെടുന്ന", "Adaptable people grow in any environment.", "ഏത് സാഹചര്യത്തിലും പൊരുത്തപ്പെടുന്നവർ വളരും."],
+      ["Decisive", "Adj", "തീരുമാനമെടുക്കാൻ കഴിവുള്ള", "Be decisive and start your session now.", "തീരുമാനമെടുത്ത് ഇപ്പോൾ തന്നെ സെഷൻ തുടങ്ങുക."],
+      ["Diligent", "Adj", "കഠിനാധ്വാനിയായ", "Diligent learners finish all twenty days.", "കഠിനാധ്വാനികളായവർ ഇരുപത് ദിവസവും പൂർത്തിയാക്കും."],
+      ["Resilient", "Adj", "പ്രതിസന്ധികളെ അതിജീവിക്കുന്ന", "A resilient mind bounces back quickly.", "പ്രതിസന്ധികളെ അതിജീവിക്കുന്ന മനസ്സ് വേഗം ഉണരും."],
+
+      // Day 18: Nuanced Qualities & Expressions
+      ["Candid", "Adj", "തുറന്നുപറയുന്ന", "Candid feedback helps you improve fast.", "തുറന്ന അഭിപ്രായങ്ങൾ വേഗം മെച്ചപ്പെടാൻ സഹായിക്കും."],
+      ["Eloquent", "Adj", "വാക്ചാതുര്യമുള്ള", "Strong vocabulary makes your speech eloquent.", "നല്ല പദസമ്പത്ത് സംസാരത്തെ വാക്ചാതുര്യമുള്ളതാക്കും."],
+      ["Pragmatic", "Adj", "പ്രായോഗിക ബുദ്ധിയുള്ള", "Take a pragmatic approach to daily study.", "ദൈനംദിന പഠനത്തിൽ പ്രായോഗിക സമീപനം സ്വീകരിക്കുക."],
+      ["Versatile", "Adj", "പലവിധത്തിൽ ഉപകരിക്കുന്ന", "Versatile words fit many situations.", "പല സാഹചര്യങ്ങളിലും ചേരുന്ന വാക്കുകൾ ഉപകാരപ്പെടും."],
+      ["Authentic", "Adj", "യഥാർത്ഥമായ / സ്വാഭാവികമായ", "Speak in an authentic, natural voice.", "സ്വാഭാവികവും യഥാർത്ഥവുമായ ശൈലിയിൽ സംസാരിക്കുക."],
+      ["Concise", "Adj", "ചുരുക്കവും വ്യക്തവുമായ", "A concise answer is easy to follow.", "ചുരുക്കമായ ഉത്തരം മനസ്സിലാക്കാൻ എളുപ്പമാണ്."],
+      ["Genuine", "Adj", "കലർപ്പില്ലാത്ത / സത്യസന്ധമായ", "Genuine interest makes learning enjoyable.", "ആത്മാർത്ഥമായ താല്പര്യം പഠനം രസകരമാക്കും."],
+      ["Vivid", "Adj", "വളരെ വ്യക്തവും തെളിഞ്ഞതുമായ", "Vivid examples stay in memory longer.", "വ്യക്തമായ ഉദാഹരണങ്ങൾ കൂടുതൽ കാലം ഓർമ്മയിൽ നിൽക്കും."],
+      ["Lucid", "Adj", "തെളിഞ്ഞ / ആശയക്കുഴപ്പമില്ലാത്ത", "Clear notes give you a lucid overview.", "വ്യക്തമായ കുറിപ്പുകൾ തെളിഞ്ഞ ധാരണ നൽകും."],
+      ["Nuanced", "Adj", "സൂക്ഷ്മമായ അർത്ഥഭേദങ്ങളുള്ള", "Nuanced expressions add depth to English.", "സൂക്ഷ്മമായ പ്രയോഗങ്ങൾ ഇംഗ്ലീഷിന് ആഴം നൽകും."],
+
+      // Day 19: Growth & Mastery Terms
+      ["Acquire", "Verb", "നേടിയെടുക്കുക", "You acquire fluency step by step.", "പടിപടിയായി നിങ്ങൾ ഭാഷാപ്രാവീണ്യം നേടിയെടുക്കും."],
+      ["Cultivate", "Verb", "വളർത്തിയെടുക്കുക", "Cultivate curiosity every single day.", "ഓരോ ദിവസവും ആകാംക്ഷ വളർത്തിയെടുക്കുക."],
+      ["Reinforce", "Verb", "വീണ്ടും ഉറപ്പിക്കുക", "Spaced review reinforces what you learned.", "ഇടവിട്ടുള്ള ആവർത്തനം പഠിച്ചത് വീണ്ടും ഉറപ്പിക്കും."],
+      ["Articulate", "Verb", "വ്യക്തമായി അവതരിപ്പിക്കുക", "Articulate your ideas clearly and calmly.", "നിങ്ങളുടെ ആശയങ്ങൾ വ്യക്തമായും ശാന്തമായും അവതരിപ്പിക്കുക."],
+      ["Persevere", "Verb", "സ്ഥിരോത്സാഹത്തോടെ തുടരുക", "Persevere until your goals are met.", "ലക്ഷ്യങ്ങൾ നേടുന്നതുവരെ സ്ഥിരോത്സാഹത്തോടെ തുടരുക."],
+      ["Adapt", "Verb", "പൊരുത്തപ്പെടുക", "Adapt your pace when days get busy.", "ദിവസങ്ങൾ തിരക്കേറുമ്പോൾ വേഗത ക്രമീകരിക്കുക."],
+      ["Clarify", "Verb", "വ്യക്തമാക്കുക", "Always clarify doubts right away.", "സംശയങ്ങൾ അപ്പോൾ തന്നെ വ്യക്തമാക്കുക."],
+      ["Prioritize", "Verb", "മുൻഗണന നൽകുക", "Prioritize your daily ten-word review.", "ദിവസത്തെ പത്ത് വാക്കിന്റെ ആവർത്തനത്തിന് മുൻഗണന നൽകുക."],
+      ["Achieve", "Verb", "നേടുക / കൈവരിക്കുക", "You can achieve great results with steady steps.", "സ്ഥിരമായ ചുവടുകളിലൂടെ വലിയ നേട്ടങ്ങൾ കൈവരിക്കാം."],
+      ["Master", "Verb", "പ്രാവീണ്യം നേടുക", "Master these core words to build confidence.", "ആത്മവിശ്വാസം നേടാൻ ഈ പ്രധാന വാക്കുകളിൽ പ്രാവീണ്യം നേടുക."],
+
+      // Day 20: Completion & Celebration Words
+      ["Milestone", "Noun", "നാഴികക്കല്ല്", "Day 20 is a major learning milestone.", "ഇരുപതാം ദിവസം വലിയൊരു പഠന നാഴികക്കല്ലാണ്."],
+      ["Achievement", "Noun", "നേട്ടം", "Completing 200 words is a real achievement.", "200 വാക്കുകൾ പൂർത്തിയാക്കുന്നത് യഥാർത്ഥ നേട്ടമാണ്."],
+      ["Confidence", "Noun", "ആത്മവിശ്വാസം", "Confidence grows as words come naturally.", "വാക്കുകൾ സ്വാഭാവികമായി വരുമ്പോൾ ആത്മവിശ്വാസം വളരും."],
+      ["Fluency", "Noun", "ഒഴുക്ക് / ഭാഷാപ്രാവീണ്യം", "Daily practice builds steady fluency.", "ദിവസേനയുള്ള പരിശീലനം ഭാഷയിൽ ഒഴുക്ക് നൽകും."],
+      ["Discipline", "Noun", "അച്ചടക്കം", "Discipline turns intention into action.", "അച്ചടക്കം ആഗ്രഹത്തെ പ്രവൃത്തിയാക്കി മാറ്റും."],
+      ["Clarity", "Noun", "വ്യക്തത", "Clarity in thought leads to clear speech.", "ചിന്തയിലെ വ്യക്തത വ്യക്തമായ സംസാരത്തിലേക്ക് നയിക്കും."],
+      ["Growth", "Noun", "വളർച്ച", "Every day of study adds to your growth.", "പഠിക്കുന്ന ഓരോ ദിവസവും നിങ്ങളുടെ വളർച്ച കൂട്ടും."],
+      ["Success", "Noun", "വിജയം", "Small daily actions lead to lasting success.", "ചെറിയ ദൈനംദിന പ്രവൃത്തികൾ നിലനിൽക്കുന്ന വിജയത്തിലേക്ക് നയിക്കും."],
+      ["Journey", "Noun", "യാത്ര", "Enjoy the journey of learning English.", "ഇംഗ്ലീഷ് പഠനത്തിന്റെ ഈ യാത്ര ആസ്വദിക്കുക."],
+      ["Mastery", "Noun", "പൂർണ്ണ പ്രാവീണ്യം", "Celebrate your step toward vocabulary mastery!", "പദസമ്പത്തിലെ മികവിലേക്കുള്ള നിങ്ങളുടെ ചുവട് ആഘോഷിക്കൂ!"]
+    ];
+
+
+
+    const WORDS = RAW_WORDS.map((item, idx) => ({
+      id: idx + 1,
+      day: Math.floor(idx / 10) + 1,
+      en: item[0],
+      pos: item[1],
+      ml: item[2],
+      ex: item[3],
+      exMl: item[4],
+      img: VISUAL_IMAGES[item[0]] || null
+    }));
+
+    const STORAGE_KEY = "cv_lexispark_state_v1";
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) return JSON.parse(raw);
+      } catch (e) {}
+      return {
+        currentDay: 1,
+        mode: "learn",
+        streak: 1,
+        freezes: 2,
+        xp: 0,
+        lastActiveDate: new Date().toDateString(),
+        progress: {} // id -> { level: 0..3, mistakes: 0, nextReview: timestamp }
+      };
+    }
+
+    let state = loadState();
+
+    // Streak & Freeze check on load
+    (function checkDailyStreak() {
+      const today = new Date().toDateString();
+      if (state.lastActiveDate !== today) {
+        const last = new Date(state.lastActiveDate);
+        const diffDays = Math.floor((new Date(today) - last) / (1000 * 60 * 60 * 24));
+        if (diffDays === 1) {
+          state.streak += 1;
+        } else if (diffDays > 1 && state.freezes > 0) {
+          state.freezes -= 1;
+        } else if (diffDays > 1) {
+          state.streak = 1;
+        }
+        state.lastActiveDate = today;
+        saveState();
+      }
+    })();
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {}
+      updateDashboard();
+    }
+
+    function getWordStat(id) {
+      if (!state.progress[id]) {
+        state.progress[id] = { level: 0, mistakes: 0, nextReview: 0 };
+      }
+      return state.progress[id];
+    }
+
+    function speakWord(text) {
+      if (!("speechSynthesis" in window)) return;
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = "en-US";
+      utter.rate = 0.92;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function getDueWords() {
+      const now = Date.now();
+      return WORDS.filter(w => {
+        const st = state.progress[w.id];
+        return st && st.level > 0 && st.nextReview <= now;
+      });
+    }
+
+    function getWeakWords() {
+      return WORDS.filter(w => {
+        const st = state.progress[w.id];
+        return st && st.mistakes > 0;
+      });
+    }
+
+    function updateDashboard() {
+      const mastered = WORDS.filter(w => (state.progress[w.id]?.level || 0) >= 2).length;
+      const due = getDueWords().length;
+      const weak = getWeakWords().length;
+
+      document.getElementById("masteredCount").textContent = mastered;
+      document.getElementById("overallBar").style.width = `${Math.round((mastered / WORDS.length) * 100)}%`;
+      document.getElementById("streakCount").textContent = state.streak;
+      document.getElementById("freezeCount").textContent = state.freezes;
+      document.getElementById("dueCount").textContent = due;
+      document.getElementById("weakCount").textContent = weak;
+      document.getElementById("tabDueBadge").textContent = due;
+      document.getElementById("tabWeakBadge").textContent = weak;
+
+      document.getElementById("certWordsText").textContent = `${mastered} / 200`;
+      document.getElementById("certXp").textContent = `${state.xp} XP`;
+      document.getElementById("certDate").textContent = new Date().toLocaleDateString();
+
+      renderDayStrip();
+    }
+
+    function renderDayStrip() {
+      const strip = document.getElementById("dayStrip");
+      strip.innerHTML = "";
+      for (let d = 1; d <= 20; d++) {
+        const dayWords = WORDS.filter(w => w.day === d);
+        const doneCount = dayWords.filter(w => (state.progress[w.id]?.level || 0) >= 2).length;
+        const btn = document.createElement("button");
+        btn.className = "day-chip" + (state.currentDay === d ? " active" : "") + (doneCount === 10 ? " completed" : "");
+        btn.innerHTML = `Day ${d} <span style="opacity:0.75">(${doneCount}/10)</span>`;
+        btn.onclick = () => {
+          state.currentDay = d;
+          saveState();
+          renderWorkspace();
+        };
+        strip.appendChild(btn);
+      }
+    }
+
+    // Quiz Session State
+    let quizQueue = [];
+    let quizIndex = 0;
+    let quizStage = 1; // 1 = MCQ, 2 = Active Recall Typing
+
+    function startQuizSession(wordList) {
+      quizQueue = [...wordList].sort(() => Math.random() - 0.5);
+      quizIndex = 0;
+      quizStage = 1;
+      renderQuizCard();
+    }
+
+    function renderQuizCard() {
+      const ws = document.getElementById("workspace");
+      if (!quizQueue.length) {
+        ws.innerHTML = `
+          <div class="empty-box">
+            <h3>ഈ വിഭാഗത്തിൽ നിലവിൽ വാക്കുകളൊന്നുമില്ല! 🎉</h3>
+            <p style="margin-top:8px;">മറ്റൊരു ദിവസം തിരഞ്ഞെടുക്കുകയോ Discover Cards വഴി പുതിയ വാക്കുകൾ പഠിക്കുകയോ ചെയ്യാം.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const current = quizQueue[quizIndex];
+      const stageLabel = quizStage === 1
+        ? "Stage 1: Recognize Meaning (ശരിയായ വാക്ക് തിരഞ്ഞെടുക്കുക)"
+        : "Stage 2: Active Recall (സ്പെല്ലിംഗ് ടൈപ്പ് ചെയ്ത് ഉറപ്പിക്കുക)";
+
+      if (quizStage === 1) {
+        // Generate 3 distractors
+        const distractors = WORDS
+          .filter(w => w.id !== current.id)
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 3);
+        const choices = [current, ...distractors].sort(() => Math.random() - 0.5);
+
+        ws.innerHTML = `
+          <div class="arena-box">
+            <div class="arena-header">
+              <span class="stage-pill">${stageLabel}</span>
+              <span class="no-image-note">🙈 Quiz Mode: ചിത്രം മറച്ചുവെച്ചിരിക്കുന്നു (Pure Memory Recall)</span>
+            </div>
+            <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:10px;">
+              Question ${quizIndex + 1} of ${quizQueue.length} • +15 XP
+            </div>
+            <div class="prompt-card">
+              <div class="prompt-label">ഈ മലയാളം അർത്ഥത്തിന് അനുയോജ്യമായ ഇംഗ്ലീഷ് വാക്ക് ഏതാണ്?</div>
+              <div class="prompt-main" style="color:var(--emerald)">${current.ml}</div>
+              <div class="prompt-hint">"${current.ex.replace(new RegExp(current.en, "gi"), "_____")}"</div>
+            </div>
+            <div class="options-grid" id="optionsGrid"></div>
+            <div class="feedback-banner" id="quizFeedback"></div>
+          </div>
+        `;
+
+        const grid = document.getElementById("optionsGrid");
+        choices.forEach(opt => {
+          const btn = document.createElement("button");
+          btn.className = "option-btn";
+          btn.textContent = opt.en;
+          btn.onclick = () => handleMcqAnswer(btn, opt.id === current.id, current);
+          grid.appendChild(btn);
+        });
+      } else {
+        // Stage 2: Active Recall Typing
+        const maskedHint = current.en[0] + " _ ".repeat(current.en.length - 2) + current.en[current.en.length - 1];
+        ws.innerHTML = `
+          <div class="arena-box">
+            <div class="arena-header">
+              <span class="stage-pill">${stageLabel}</span>
+              <span class="no-image-note">✍️ Active Recall: ഓർത്തെടുത്ത് ടൈപ്പ് ചെയ്യുക</span>
+            </div>
+            <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:10px;">
+              Question ${quizIndex + 1} of ${quizQueue.length} • +25 XP
+            </div>
+            <div class="prompt-card">
+              <div class="prompt-label">അർത്ഥവും സൂചനയും നോക്കി വാക്ക് ടൈപ്പ് ചെയ്യുക</div>
+              <div class="prompt-main" style="color:var(--emerald)">${current.ml}</div>
+              <div class="prompt-hint" style="margin-bottom:10px;">Hint: <strong style="letter-spacing:2px;color:var(--cyan)">${maskedHint}</strong> (${current.en.length} letters)</div>
+              <div class="prompt-hint">"${current.ex.replace(new RegExp(current.en, "gi"), "_____")}"</div>
+            </div>
+            <div class="recall-input-wrap">
+              <input type="text" id="recallInput" class="recall-input" placeholder="ഇംഗ്ലീഷ് വാക്ക് ഇവിടെ ടൈപ്പ് ചെയ്യുക..." autocomplete="off" />
+              <button class="btn btn-primary" id="checkRecallBtn">Check Answer</button>
+            </div>
+            <div class="feedback-banner" id="quizFeedback"></div>
+          </div>
+        `;
+
+        const input = document.getElementById("recallInput");
+        const checkBtn = document.getElementById("checkRecallBtn");
+        input.focus();
+        input.addEventListener("keydown", e => {
+          if (e.key === "Enter") checkBtn.click();
+        });
+        checkBtn.onclick = () => handleRecallAnswer(input.value.trim(), current);
+      }
+    }
+
+    function handleMcqAnswer(btn, isCorrect, word) {
+      const buttons = document.querySelectorAll(".option-btn");
+      buttons.forEach(b => (b.disabled = true));
+      const fb = document.getElementById("quizFeedback");
+      const st = getWordStat(word.id);
+
+      if (isCorrect) {
+        btn.classList.add("correct");
+        speakWord(word.en);
+        state.xp += 15;
+        st.level = Math.max(st.level, 1);
+        st.nextReview = Date.now() + 24 * 60 * 60 * 1000; // +1 day
+        fb.className = "feedback-banner good";
+        fb.textContent = `ശരിയാണ്! "${word.en}" — ഇനി അടുത്ത ഘട്ടത്തിലേക്ക്...`;
+        saveState();
+        setTimeout(() => {
+          advanceQuiz();
+        }, 900);
+      } else {
+        btn.classList.add("wrong");
+        st.mistakes += 1;
+        fb.className = "feedback-banner bad";
+        fb.textContent = `തെറ്റിപ്പോയി! ശരിയായ ഉത്തരം: ${word.en} (${word.ml}). ഇത് Weak Vault-ലേക്ക് ചേർത്തിട്ടുണ്ട്.`;
+        saveState();
+        setTimeout(() => {
+          advanceQuiz();
+        }, 1600);
+      }
+    }
+
+    function handleRecallAnswer(typed, word) {
+      if (!typed) return;
+      const fb = document.getElementById("quizFeedback");
+      const st = getWordStat(word.id);
+      const isCorrect = typed.toLowerCase() === word.en.toLowerCase();
+
+      if (isCorrect) {
+        speakWord(word.en);
+        state.xp += 25;
+        st.level = Math.min(3, st.level + 1);
+        // Spaced Repetition Interval: level 2 -> 3 days, level 3 -> 7 days
+        const daysAhead = st.level >= 3 ? 7 : 3;
+        st.nextReview = Date.now() + daysAhead * 24 * 60 * 60 * 1000;
+        if (st.mistakes > 0) st.mistakes -= 1;
+
+        fb.className = "feedback-banner good";
+        fb.textContent = `അത്യുഗ്രൻ! "${word.en}" മനസ്സിൽ ഉറച്ചു (അടുത്ത റിവിഷൻ ${daysAhead} ദിവസത്തിന് ശേഷം).`;
+        saveState();
+        setTimeout(() => {
+          advanceQuiz();
+        }, 1100);
+      } else {
+        st.mistakes += 1;
+        fb.className = "feedback-banner bad";
+        fb.textContent = `ശരിയായ സ്പെല്ലിംഗ്: "${word.en}" — വീണ്ടും ഒന്ന് ശ്രദ്ധിക്കൂ!`;
+        saveState();
+        setTimeout(() => {
+          advanceQuiz();
+        }, 1600);
+      }
+    }
+
+    function advanceQuiz() {
+      if (quizIndex + 1 < quizQueue.length) {
+        quizIndex += 1;
+        renderQuizCard();
+      } else if (quizStage === 1) {
+        quizStage = 2;
+        quizIndex = 0;
+        quizQueue.sort(() => Math.random() - 0.5);
+        renderQuizCard();
+      } else {
+        const ws = document.getElementById("workspace");
+        ws.innerHTML = `
+          <div class="arena-box" style="text-align:center;">
+            <div style="font-size:2.6rem;margin-bottom:10px;">🏆</div>
+            <h2>Session Complete! മികച്ച പ്രകടനം!</h2>
+            <p style="color:var(--text-soft);margin:10px 0 20px;">
+              നിങ്ങൾ ഈ സെഷനിലെ വാക്കുകൾ Spaced Repetition ഷെഡ്യൂളിലേക്ക് വിജയകരമായി ചേർത്തിരിക്കുന്നു.
+            </p>
+            <button class="btn btn-primary" onclick="switchMode('learn')">📖 വാക്കുകളിലേക്ക് മടങ്ങുക</button>
+          </div>
+        `;
+      }
+    }
+
+    function renderLearnCards() {
+      const ws = document.getElementById("workspace");
+      const dayWords = WORDS.filter(w => w.day === state.currentDay);
+
+      const grid = document.createElement("div");
+      grid.className = "cards-grid";
+
+      dayWords.forEach(w => {
+        const st = getWordStat(w.id);
+        const card = document.createElement("article");
+        card.className = "word-card";
+
+        let visualHtml = "";
+        if (w.img) {
+          visualHtml = `
+            <div class="word-visual">
+              <img src="${w.img}" alt="${w.en}" loading="lazy" onerror="this.parentElement.style.display='none'" />
+              <span class="visual-badge">🖼️ Visual Memory</span>
+            </div>
+          `;
+        }
+
+        let statusClass = "mastery-tag";
+        let statusText = "New Word";
+        if (st.level >= 2) {
+          statusClass += " done";
+          statusText = "✓ Mastered";
+        } else if (st.mistakes > 0) {
+          statusClass += " weak";
+          statusText = "⚠ Weak Word";
+        } else if (st.level === 1) {
+          statusText = "In Progress";
+        }
+
+        card.innerHTML = `
+          ${visualHtml}
+          <div class="card-body">
+            <div class="word-head">
+              <div>
+                <div class="word-pos">${w.pos} • Day ${w.day}</div>
+                <div class="word-en">${w.en}</div>
+              </div>
+              <button class="audio-btn" title="Listen Pronunciation" data-speak="${w.en}">🔊</button>
+            </div>
+            <div class="word-ml">${w.ml}</div>
+            <div class="context-box">
+              “${w.ex}”
+              <small>${w.exMl}</small>
+            </div>
+            <div class="card-footer">
+              <span class="${statusClass}">${statusText}</span>
+              <button class="btn" style="padding:6px 12px;font-size:0.78rem;" data-mark="${w.id}">
+                ${st.level >= 2 ? "★ Mastered" : "Mark Learned"}
+              </button>
+            </div>
+          </div>
+        `;
+
+        card.querySelector("[data-speak]").onclick = () => speakWord(w.en);
+        card.querySelector("[data-mark]").onclick = () => {
+          const s = getWordStat(w.id);
+          s.level = s.level >= 2 ? 0 : 2;
+          s.nextReview = Date.now() + 3 * 24 * 60 * 60 * 1000;
+          if (s.level >= 2) state.xp += 10;
+          saveState();
+          renderLearnCards();
+        };
+
+        grid.appendChild(card);
+      });
+
+      ws.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+          <div>
+            <h2 style="font-size:1.2rem;">Day ${state.currentDay} — Core 10 Words</h2>
+            <p style="font-size:0.84rem;color:var(--text-muted);">ഉച്ചാരണം കേട്ട്, ചിത്രങ്ങളും സന്ദർഭ വാക്യങ്ങളും ശ്രദ്ധിച്ച് പഠിച്ച ശേഷം Quiz തുടങ്ങുക.</p>
+          </div>
+          <button class="btn btn-primary" id="startDayQuizBtn">🧠 Start Day ${state.currentDay} Recall Quiz →</button>
+        </div>
+      `;
+      ws.appendChild(grid);
+
+      document.getElementById("startDayQuizBtn").onclick = () => {
+        switchMode("practice");
+      };
+    }
+
+    function switchMode(mode) {
+      state.mode = mode;
+      document.querySelectorAll(".tab-btn").forEach(b => {
+        b.classList.toggle("active", b.dataset.mode === mode);
+      });
+      renderWorkspace();
+    }
+
+    function renderWorkspace() {
+      if (state.mode === "learn") {
+        renderLearnCards();
+      } else if (state.mode === "practice") {
+        const dayWords = WORDS.filter(w => w.day === state.currentDay);
+        startQuizSession(dayWords);
+      } else if (state.mode === "review") {
+        startQuizSession(getDueWords());
+      } else if (state.mode === "weak") {
+        startQuizSession(getWeakWords());
+      }
+    }
+
+    // Event Listeners
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.onclick = () => switchMode(btn.dataset.mode);
+    });
+
+    document.getElementById("openCertBtn").onclick = () => {
+      document.getElementById("certModal").classList.add("open");
+    };
+
+    document.getElementById("closeCertBtn").onclick = () => {
+      document.getElementById("certModal").classList.remove("open");
+    };
+
+    // Initial Boot
+    updateDashboard();
+    renderWorkspace();
+  </script>
+</body>
+</html>
