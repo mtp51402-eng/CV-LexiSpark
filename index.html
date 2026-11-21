@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV LexiSpark — Smart 20-Day English Vocabulary Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-base: #060913;
+      --bg-elevated: rgba(15, 23, 42, 0.78);
+      --bg-card: rgba(23, 35, 58, 0.82);
+      --bg-card-hover: rgba(34, 49, 80, 0.92);
+      --border-subtle: rgba(148, 163, 184, 0.16);
+      --border-strong: rgba(56, 189, 248, 0.38);
+      --cyan: #38bdf8;
+      --indigo: #818cf8;
+      --emerald: #34d399;
+      --amber: #fbbf24;
+      --rose: #fb7185;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-soft: #cbd5e1;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow-glow: 0 18px 45px -15px rgba(2, 6, 23, 0.85);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans Malayalam', sans-serif;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(56, 189, 248, 0.14), transparent 34%),
+        radial-gradient(circle at 88% 15%, rgba(129, 140, 248, 0.14), transparent 36%),
+        radial-gradient(circle at 50% 95%, rgba(52, 211, 153, 0.08), transparent 40%),
+        var(--bg-base);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.55;
+      padding-bottom: 60px;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 20px 18px;
+    }
+
+    /* Top Header */
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      background: var(--bg-elevated);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 16px 22px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0284c7, #6366f1);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: 0.5px;
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.35);
+    }
+
+    .brand-title h1 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-title h1 span.tag {
+      font-size: 0.72rem;
+      background: rgba(56, 189, 248, 0.16);
+      color: var(--cyan);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .brand-title p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      border: 1px solid var(--border-subtle);
+      background: rgba(30, 41, 59, 0.85);
+      color: var(--text-main);
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background: rgba(51, 65, 85, 0.95);
+      border-color: var(--border-strong);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0ea5e9, #6366f1);
+      border: none;
+      color: #fff;
+      box-shadow: 0 8px 22px -6px rgba(14, 165, 233, 0.55);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    .btn-emerald {
+      background: linear-gradient(135deg, #10b981, #059669);
+      border: none;
+      color: #fff;
+    }
+
+    .btn-amber {
+      background: rgba(251, 191, 36, 0.14);
+      border-color: rgba(251, 191, 36, 0.4);
+      color: var(--amber);
+    }
+
+    .btn-rose {
+      background: rgba(251, 113, 133, 0.14);
+      border-color: rgba(251, 113, 133, 0.4);
+      color: var(--rose);
+    }
+
+    /* Bento Stats Grid */
+    .bento-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .stat-value {
+      font-size: 1.65rem;
+      font-weight: 800;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .stat-sub {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .progress-bar-wrap {
+      width: 100%;
+      height: 8px;
+      background: rgba(148, 163, 184, 0.16);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan), var(--emerald));
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    /* Mode Tabs & Day Selector */
+    .control-panel {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      margin-bottom: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mode-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tab-btn {
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(15, 23, 42, 0.65);
+      color: var(--text-soft);
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: var(--cyan);
+      color: #fff;
+    }
+
+    .pill-count {
+      background: rgba(255, 255, 255, 0.12);
+      padding: 1px 7px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+    }
+
+    .day-strip {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+
+    .day-strip::-webkit-scrollbar {
+      height: 6px;
+    }
+    .day-strip::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.25);
+      border-radius: 999px;
+    }
+
+    .day-chip {
+      flex: 0 0 auto;
+      padding: 8px 14px;
+      border-radius: 11px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(15, 23, 42, 0.75);
+      color: var(--text-soft);
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .day-chip.active {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.28), rgba(99, 102, 241, 0.28));
+      border-color: var(--cyan);
+      color: #fff;
+    }
+
+    .day-chip.completed {
+      border-color: rgba(52, 211, 153, 0.45);
+      color: var(--emerald);
+    }
+
+    /* Cards Grid (Learn Mode) */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 18px;
+    }
+
+    .word-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.22s ease, border-color 0.22s ease;
+      box-shadow: 0 12px 30px -12px rgba(2, 6, 23, 0.7);
+    }
+
+    .word-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-strong);
+      background: var(--bg-card-hover);
+    }
+
+    .word-visual {
+      width: 100%;
+      height: 155px;
+      position: relative;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      overflow: hidden;
+    }
+
+    .word-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .visual-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(6, 9, 19, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--cyan);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+
+    .card-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .word-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .word-en {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+
+    .word-pos {
+      font-size: 0.76rem;
+      color: var(--indigo);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .audio-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      background: rgba(56, 189, 248, 0.14);
+      color: var(--cyan);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 1.05rem;
+      flex-shrink: 0;
+      transition: all 0.18s;
+    }
+
+    .audio-btn:hover {
+      background: var(--cyan);
+      color: #060913;
+    }
+
+    .word-ml {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--emerald);
+    }
+
+    .context-box {
+      background: rgba(6, 9, 19, 0.48);
+      border-left: 3px solid var(--cyan);
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      color: var(--text-soft);
+    }
+
+    .context-box small {
+      display: block;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-size: 0.8rem;
+    }
+
+    .card-footer {
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .mastery-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.14);
+      color: var(--text-muted);
+    }
+
+    .mastery-tag.done {
+      background: rgba(52, 211, 153, 0.16);
+      color: var(--emerald);
+    }
+
+    .mastery-tag.weak {
+      background: rgba(251, 113, 133, 0.16);
+      color: var(--rose);
+    }
+
+    /* Practice / Quiz Arena */
+    .arena-box {
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .arena-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .stage-pill {
+      background: rgba(129, 140, 248, 0.18);
+      border: 1px solid rgba(129, 140, 248, 0.4);
+      color: var(--indigo);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .no-image-note {
+      font-size: 0.76rem;
+      color: var(--amber);
+      background: rgba(251, 191, 36, 0.1);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+
+    .prompt-card {
+      background: rgba(6, 9, 19, 0.55);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 22px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .prompt-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .prompt-main {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .prompt-hint {
+      font-size: 0.92rem;
+      color: var(--text-soft);
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .option-btn {
+      padding: 15px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(15, 23, 42, 0.85);
+      color: #fff;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.18s;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--cyan);
+      background: rgba(56, 189, 248, 0.14);
+    }
+
+    .option-btn.correct {
+      background: rgba(16, 185, 129, 0.24);
+      border-color: var(--emerald);
+      color: var(--emerald);
+    }
+
+    .option-btn.wrong {
+      background: rgba(244, 63, 94, 0.22);
+      border-color: var(--rose);
+      color: var(--rose);
+    }
+
+    .recall-input-wrap {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .recall-input {
+      flex: 1;
+      min-width: 220px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border-strong);
+      background: rgba(6, 9, 19, 0.8);
+      color: #fff;
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 600;
+      outline: none;
+    }
+
+    .feedback-banner {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      display: none;
+    }
+
+    .feedback-banner.good {
+      display: block;
+      background: rgba(16, 185, 129, 0.18);
+      border: 1px solid rgba(52, 211, 153, 0.45);
+      color: var(--emerald);
+    }
+
+    .feedback-banner.bad {
+      display: block;
+      background: rgba(244, 63, 94, 0.18);
+      border: 1px solid rgba(251, 113, 133, 0.45);
+      color: var(--rose);
+    }
+
+    /* Empty State */
+    .empty-box {
+      text-align: center;
+      padding: 48px 20px;
+      background: var(--bg-elevated);
+      border: 1px dashed var(--border-subtle);
+      border-radius: var(--radius-lg);
+      color: var(--text-soft);
+    }
+
+    /* Modal / Certificate */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.85);
+      backdrop-filter: blur(8px);
+      display: none;
+      place-items: center;
+      padding: 18px;
+      z-index: 100;
+    }
+
+    .modal-overlay.open {
+      display: grid;
+    }
+
+    .cert-card {
+      background: #fff;
+      color: #0f172a;
+      max-width: 680px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 36px;
+      border: 8px double #0284c7;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+    }
+
+    .cert-card h2 {
+      font-size: 1.8rem;
+      color: #0369a1;
+      margin-bottom: 8px;
+    }
+
+    .cert-name-input {
+      border: none;
+      border-bottom: 2px solid #0284c7;
+      font-size: 1.4rem;
+      font-weight: 800;
+      text-align: center;
+      color: #0f172a;
+      padding: 6px 12px;
+      margin: 14px 0;
+      width: 80%;
+      outline: none;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #certModal, #certModal * {
+        visibility: visible;
+      }
+      #certModal {
+        position: fixed;
+        inset: 0;
+        background: #fff;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-badge">CV</div>
+        <div class="brand-title">
+          <h1>CV LexiSpark <span class="tag">Smart Memory Engine</span></h1>
+          <p>Spaced Repetition • Active Recall • Dual-Coding Visuals (200 Core Words)</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-amber" id="streakFreezeBtn" title="ഒരു ദിവസം മുടങ്ങിയാൽ Streak സംരക്ഷിക്കാൻ">
+          🛡️ Streak Freeze: <span id="freezeCount">2</span>
+        </button>
+        <button class="btn btn-emerald" id="openCertBtn">
+          🎓 Certificate
+        </button>
+      </div>
+    </header>
+
+    <!-- Bento Dashboard -->
+    <section class="bento-stats">
+      <div class="stat-card">
+        <div class="stat-label">Mastered Words (മനസ്സിൽ ഉറച്ചവ)</div>
+        <div class="stat-value"><span id="masteredCount">0</span> <span style="font-size:0.95rem;color:var(--text-muted)">/ 200</span></div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" id="overallBar"></div></div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Daily Streak (തുടർച്ച)</div>
+        <div class="stat-value">🔥 <span id="streakCount">1</span> <span style="font-size:0.95rem;color:var(--text-muted)">Days</span></div>
+        <div class="stat-sub" id="streakSub">ഇന്നത്തെ 10 വാക്കുകൾ പൂർത്തിയാക്കൂ!</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Spaced Review Due (ഇന്ന് ആവർത്തിക്കേണ്ടവ)</div>
+        <div class="stat-value" style="color:var(--cyan)"><span id="dueCount">0</span> <span style="font-size:0.95rem;color:var(--text-muted)">Words</span></div>
+        <div class="stat-sub">മറക്കുന്നതിന് മുൻപ് ഓർമ്മ പുതുക്കാം</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Weak-Word Radar (കൂടുതൽ ശ്രദ്ധിക്കേണ്ടവ)</div>
+        <div class="stat-value" style="color:var(--rose)"><span id="weakCount">0</span> <span style="font-size:0.95rem;color:var(--text-muted)">Words</span></div>
+        <div class="stat-sub">തെറ്റിയ വാക്കുകൾ പ്രത്യേക പരിശീലനത്തിന്</div>
+      </div>
+    </section>
+
+    <!-- Controls & Mode Tabs -->
+    <section class="control-panel">
+      <div class="mode-tabs">
+        <button class="tab-btn active" data-mode="learn">
+          📖 1. Discover & Visual Cards
+        </button>
+        <button class="tab-btn" data-mode="practice">
+          🧠 2. Active Recall & Quiz
+        </button>
+        <button class="tab-btn" data-mode="review">
+          🔁 3. Spaced Review <span class="pill-count" id="tabDueBadge">0</span>
+        </button>
+        <button class="tab-btn" data-mode="weak">
+          🎯 4. Weak Vault <span class="pill-count" id="tabWeakBadge">0</span>
+        </button>
+      </div>
+
+      <div class="day-strip" id="dayStrip"></div>
+    </section>
+
+    <!-- Main Dynamic Workspace -->
+    <main id="workspace"></main>
+  </div>
+
+  <!-- Certificate Modal -->
+  <div class="modal-overlay" id="certModal">
+    <div class="cert-card">
+      <div style="font-size:0.85rem;font-weight:800;letter-spacing:2px;color:#0284c7;">CV LEXISPARK ACADEMY</div>
+      <h2>Certificate of Vocabulary Mastery</h2>
+      <p style="color:#475569;font-size:0.95rem;">This certifies that</p>
+      <input type="text" id="learnerName" class="cert-name-input" placeholder="നിങ്ങളുടെ പേര് ഇവിടെ ടൈപ്പ് ചെയ്യുക" value="CV Learner" />
+      <p style="color:#334155;font-size:0.98rem;margin:10px 0 18px;">
+        has actively practiced and mastered <strong id="certWordsText">0 / 200</strong> essential English words through Spaced Repetition and Active Recall.
+      </p>
+      <div style="display:flex;justify-content:space-around;font-size:0.82rem;color:#64748b;margin-top:20px;border-top:1px solid #e2e8f0;padding-top:14px;">
+        <div>Date: <strong id="certDate"></strong></div>
+        <div>XP Earned: <strong id="certXp">0 XP</strong></div>
+      </div>
+      <div class="no-print" style="margin-top:24px;display:flex;gap:10px;justify-content:center;">
+        <button class="btn btn-primary" onclick="window.print()">🖨️ Print / Save PDF</button>
+        <button class="btn" id="closeCertBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Curated Visual Map (only for concrete, high-value visual words)
+    const VISUAL_IMAGES = {
+      "Abundant": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=640&q=75",
+      "Fragile": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=640&q=75",
+      "Illuminate": "https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=640&q=75",
+      "Navigator": "https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=640&q=75",
+      "Summit": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=640&q=75",
+      "Tranquil": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=640&q=75",
+      "Harvest": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=640&q=75",
+      "Sculpt": "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&w=640&q=75",
+      "Horizon": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=640&q=75",
+      "Sprint": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=640&q=75",
+      "Shelter": "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=640&q=75",
+      "Blueprint": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=640&q=75",
+      "Anchor": "https://images.unsplash.com/photo-1516939884455-1445c8652f83?auto=format&fit=crop&w=640&q=75",
+      "Mosaic": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=640&q=75",
+      "Catalyst": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=640&q=75",
+      "Beacon": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=640&q=75",
+      "Flourish": "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=640&q=75",
+      "Glimpse": "https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?auto=format&fit=crop&w=640&q=75",
+      "Arid": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=640&q=75",
+      "Cascade": "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=640&q=75"
+    };
+
+    // 200 High-Utility Everyday & Professional Words (20 Days x 10 Words)
+    const RAW_WORDS = [
+      // Day 1
+      ["Abundant", "Adj", "സമൃദ്ധമായ / ധാരാളമുള്ള", "The region has abundant natural water resources.", "ഈ പ്രദേശത്ത് സമൃദ്ധമായ ജലസ്രോതസ്സുകളുണ്ട്."],
+      ["Clarify", "Verb", "വ്യക്തമാക്കുക / സംശയം തീർക്കുക", "Could you clarify your point about the schedule?", "സമയക്രമത്തെക്കുറിച്ചുള്ള നിങ്ങളുടെ ആശയം വ്യക്തമാക്കാമോ?"],
+      ["Resilient", "Adj", "പ്രതിസന്ധികളെ അതിജീവിക്കുന്ന", "Children are often remarkably resilient after setbacks.", "തിരിച്ചടികൾക്ക് ശേഷം കുട്ടികൾ വേഗത്തിൽ കരുത്താർജ്ജിക്കുന്നു."],
+      ["Fragile", "Adj", "എളുപ്പം പൊട്ടുന്ന / ലോലമായ", "Handle the fragile glass box with extra care.", "എളുപ്പം പൊട്ടുന്ന ഗ്ലാസ് പെട്ടി ശ്രദ്ധയോടെ കൈകാര്യം ചെയ്യുക."],
+      ["Inevitable", "Adj", "ഒഴിവാക്കാനാവാത്ത", "Change is an inevitable part of business growth.", "ബിസിനസ് വളർച്ചയിൽ മാറ്റങ്ങൾ ഒഴിവാക്കാനാവാത്തതാണ്."],
+      ["Diligent", "Adj", "കഠിനാധ്വാനിയായ / ശ്രദ്ധയുള്ള", "She is a diligent student who never misses a task.", "ഒരു ജോലിയും മുടക്കാത്ത കഠിനാധ്വാനിയായ വിദ്യാർത്ഥിയാണ് അവൾ."],
+      ["Illuminate", "Verb", "പ്രകാശിപ്പിക്കുക / തെളിച്ചം നൽകുക", "Streetlights illuminate the road after sunset.", "സൂര്യാസ്തമയത്തിന് ശേഷം തെരുവുവിളക്കുകൾ റോഡിനെ പ്രകാശിപ്പിക്കുന്നു."],
+      ["Pragmatic", "Adj", "പ്രായോഗിക ബുദ്ധിയുള്ള", "We need a pragmatic solution rather than theory.", "സിദ്ധാന്തത്തേക്കാൾ പ്രായോഗികമായ ഒരു പരിഹാരമാണ് നമുക്ക് വേണ്ടത്."],
+      ["Reluctant", "Adj", "മടിയുള്ള / വിമുഖതയുള്ള", "He was reluctant to speak in front of a large crowd.", "വലിയൊരു ജനക്കൂട്ടത്തിന് മുന്നിൽ സംസാരിക്കാൻ അവന് മടിയായിരുന്നു."],
+      ["Summit", "Noun", "കൊടുമുടി / ഉച്ചകോടി", "The climbers reached the mountain summit at dawn.", "പർവ്വതാരോഹകർ പുലർച്ചെ കൊടുമുടിയിൽ എത്തിച്ചേർന്നു."],
+
+      // Day 2
+      ["Authentic", "Adj", "യഥാർത്ഥമായ / വിശ്വസനീയമായ", "Customers always appreciate authentic feedback.", "ഉപഭോക്താക്കൾ എപ്പോഴും സത്യസന്ധമായ അഭിപ്രായങ്ങളെ വിലമതിക്കുന്നു."],
+      ["Concise", "Adj", "ചുരുക്കവും വ്യക്തവുമായ", "Keep your email concise and easy to read.", "നിങ്ങളുടെ ഇമെയിൽ ചുരുക്കവും വായിക്കാൻ എളുപ്പമുള്ളതുമാക്കുക."],
+      ["Tranquil", "Adj", "ശാന്തമായ", "We spent a tranquil morning beside the lake.", "തടാകക്കരയിൽ ഞങ്ങൾ ശാന്തമായ ഒരു പ്രഭാതം ചെലവഴിച്ചു."],
+      ["Adapt", "Verb", "പൊരുത്തപ്പെടുക / മാറ്റത്തിനനുസരിച്ച് മാറുക", "Successful teams adapt quickly to new tools.", "വിജയിക്കുന്ന ടീമുകൾ പുതിയ ഉപകരണങ്ങളുമായി വേഗം പൊരുത്തപ്പെടുന്നു."],
+      ["Cautious", "Adj", "ജാഗ്രതയുള്ള / കരുതലുള്ള", "Be cautious while driving on wet roads.", "നനഞ്ഞ റോഡുകളിൽ വാഹനമോടിക്കുമ്പോൾ ജാഗ്രത പാലിക്കുക."],
+      ["Empathy", "Noun", "സഹാനുഭൂതി / മറ്റുള്ളവരുടെ വികാരം മനസ്സിലാക്കൽ", "Good leaders listen to their team with empathy.", "നല്ല നേതാക്കൾ തങ്ങളുടെ ടീമിനെ സഹാനുഭൂതിയോടെ കേൾക്കുന്നു."],
+      ["Harvest", "Noun", "വിളവെടുപ്പ് / ഫലം", "Farmers celebrated a rich harvest this season.", "ഈ സീസണിൽ മികച്ച വിളവെടുപ്പ് കർഷകർ ആഘോഷിച്ചു."],
+      ["Obstacle", "Noun", "തടസ്സം / പ്രതിബന്ധം", "Lack of time should not be an obstacle to learning.", "സമയക്കുറവ് പഠനത്തിന് ഒരു തടസ്സമാകരുത്."],
+      ["Persuade", "Verb", "പ്രേരിപ്പിക്കുക / ബോധ്യപ്പെടുത്തുക", "She managed to persuade the team to try the new plan.", "പുതിയ പദ്ധതി പരീക്ഷിക്കാൻ ടീമിനെ ബോധ്യപ്പെടുത്താൻ അവൾക്ക് കഴിഞ്ഞു."],
+      ["Versatile", "Adj", "ബഹുമുഖ പ്രതിഭയുള്ള / പല ആവശ്യങ്ങൾക്ക് പറ്റുന്ന", "A smartphone is a versatile tool for daily work.", "നിത്യേനയുള്ള ജോലികൾക്ക് സ്മാർട്ട്‌ഫോൺ പലവിധത്തിൽ ഉപകരിക്കുന്ന ഉപകരണമാണ്."],
+
+      // Day 3
+      ["Accumulate", "Verb", "ശേഖരിക്കുക / കുന്നുകൂട്ടുക", "Small daily savings accumulate into a large fund.", "ചെറിയ ദൈനംദിന സമ്പാദ്യങ്ങൾ വലിയൊരു തുകയായി മാറുന്നു."],
+      ["Benevolent", "Adj", "ദയയുള്ള / നന്മ ആഗ്രഹിക്കുന്ന", "The benevolent donor funded the village library.", "ദയാലുവായ ആ ദാതാവ് ഗ്രാമത്തിലെ ലൈബ്രറിക്ക് സാമ്പത്തിക സഹായം നൽകി."],
+      ["Navigator", "Noun", "വഴികാട്ടി / ദിശ അറിയുന്നയാൾ", "A reliable navigator keeps the ship on course.", "വിശ്വസ്തനായ ഒരു വഴികാട്ടി കപ്പലിനെ ശരിയായ ദിശയിൽ നയിക്കുന്നു."],
+      ["Deteriorate", "Verb", "മോശമാവുക / ക്ഷയിക്കുക", "Without maintenance, the old bridge will deteriorate.", "പരിപാലനമില്ലെങ്കിൽ ആ പഴയ പാലം കൂടുതൽ മോശമാകും."],
+      ["Eloquent", "Adj", "വാക്ചാതുര്യമുള്ള / വ്യക്തമായി സംസാരിക്കുന്ന", "Her eloquent speech inspired everyone in the hall.", "അവളുടെ വാക്ചാതുര്യമുള്ള പ്രസംഗം ഹാളിലുണ്ടായിരുന്ന എല്ലാവരെയും പ്രചോദിപ്പിച്ചു."],
+      ["Feasible", "Adj", "സാധ്യമായ / നടപ്പിലാക്കാൻ കഴിയുന്ന", "Is it feasible to finish this project by Friday?", "വെള്ളിയാഴ്ചയ്ക്കകം ഈ പ്രോജക്ട് പൂർത്തിയാക്കാൻ സാധിക്കുമോ?"],
+      ["Glimpse", "Noun", "ഒരു നോട്ടം / മിന്നായം", "We caught a brief glimpse of the sunrise through the clouds.", "മേഘങ്ങൾക്കിടയിലൂടെ സൂര്യോദയത്തിന്റെ ഒരു മിന്നായം ഞങ്ങൾ കണ്ടു."],
+      ["Hinder", "Verb", "തടസ്സപ്പെടുത്തുക", "Heavy rain may hinder the outdoor event.", "കനത്ത മഴ പുറത്തുള്ള പരിപാടിയെ തടസ്സപ്പെടുത്തിയേക്കാം."],
+      ["Impartial", "Adj", "നിഷ്പക്ഷമായ", "A judge must remain impartial in every case.", "ഏതൊരു കേസിലും ന്യായാധിപൻ നിഷ്പക്ഷനായിരിക്കണം."],
+      ["Horizon", "Noun", "ചക്രവാളം / അറിവിന്റെ പരിധി", "Reading expands your mental horizon.", "വായന നിങ്ങളുടെ ചിന്തയുടെ ചക്രവാളം വികസിപ്പിക്കുന്നു."],
+
+      // Day 4
+      ["Alleviate", "Verb", "ലഘൂകരിക്കുക / വേദന കുറയ്ക്കുക", "Warm tea can help alleviate a sore throat.", "ചൂടുള്ള ചായ തൊണ്ടവേദന കുറയ്ക്കാൻ സഹായിക്കും."],
+      ["Blueprint", "Noun", "രൂപരേഖ / കൃത്യമായ പദ്ധതി", "This guide acts as a blueprint for your study routine.", "ഈ മാർഗ്ഗരേഖ നിങ്ങളുടെ പഠനരീതിയുടെ കൃത്യമായ രൂപരേഖയായി പ്രവർത്തിക്കുന്നു."],
+      ["Candid", "Adj", "തുറന്നുപറയുന്ന / ഒളിച്ചുവെക്കാത്ത", "Thank you for giving me your candid opinion.", "നിങ്ങളുടെ തുറന്ന അഭിപ്രായം പറഞ്ഞതിന് നന്ദി."],
+      ["Deplete", "Verb", "തീർന്നുപോവുക / ശോഷിക്കുക", "Working without breaks will quickly deplete your energy.", "ഇടവേളകളില്ലാതെ ജോലി ചെയ്യുന്നത് നിങ്ങളുടെ ഊർജ്ജം വേഗം തീർക്കും."],
+      ["Enhance", "Verb", "മെച്ചപ്പെടുത്തുക / കൂട്ടുക", "Good lighting can enhance the look of any room.", "നല്ല വെളിച്ചം ഏതൊരു മുറിയുടെയും ഭംഗി വർദ്ധിപ്പിക്കും."],
+      ["Flourish", "Verb", "തഴച്ചുവളരുക / അഭിവൃദ്ധിപ്പെടുക", "Plants flourish when they get enough sunlight and water.", "ആവശ്യത്തിന് സൂര്യപ്രകാശവും വെള്ളവും ലഭിക്കുമ്പോൾ ചെടികൾ തഴച്ചുവളരുന്നു."],
+      ["Gratitude", "Noun", "കൃതജ്ഞത / നന്ദി", "Expressing gratitude improves daily happiness.", "നന്ദി പ്രകടിപ്പിക്കുന്നത് ദൈനംദിന സന്തോഷം വർദ്ധിപ്പിക്കുന്നു."],
+      ["Hesitate", "Verb", "മടിക്കുക / സംശയിച്ചു നിൽക്കുക", "Do not hesitate to ask questions when you are learning.", "പഠിക്കുമ്പോൾ ചോദ്യങ്ങൾ ചോദിക്കാൻ ഒരിക്കലും മടിക്കരുത്."],
+      ["Ingenious", "Adj", "ബുദ്ധിപരമായ / നൂതനമായ", "That is an ingenious way to save space in a small room.", "ചെറിയ മുറിയിൽ സ്ഥലം ലാഭിക്കാനുള്ള ബുദ്ധിപരമായ ഒരു വഴിയാണത്."],
+      ["Sprint", "Noun", "വേഗത്തിലുള്ള ഓട്ടം / ചെറിയ വേഗതയുള്ള ഘട്ടം", "A ten-minute vocabulary sprint keeps your mind sharp.", "പത്ത് മിനിറ്റുള്ള വൊക്കാബുലറി പരിശീലനം മനസ്സിനെ കൂർമ്മതയുള്ളതാക്കുന്നു."],
+
+      // Day 5
+      ["Ambiguous", "Adj", "അവ്യക്തമായ / രണ്ടർത്ഥമുള്ള", "Avoid ambiguous instructions so everyone understands clearly.", "എല്ലാവർക്കും വ്യക്തമായി മനസ്സിലാകാൻ അവ്യക്തമായ നിർദ്ദേശങ്ങൾ ഒഴിവാക്കുക."],
+      ["Anchor", "Noun", "നങ്കൂരം / ഉറച്ച അടിത്തറ", "Daily habits serve as an anchor during busy weeks.", "തിരക്കേറിയ ആഴ്ചകളിൽ ദൈനംദിന ശീലങ്ങൾ ഒരു ഉറച്ച അടിത്തറയായി പ്രവർത്തിക്കുന്നു."],
+      ["Collaborate", "Verb", "സഹകരിച്ച് പ്രവർത്തിക്കുക", "Designers and writers collaborate to build great apps.", "മികച്ച ആപ്പുകൾ നിർമ്മിക്കാൻ ഡിസൈനർമാരും എഴുത്തുകാരും സഹകരിച്ച് പ്രവർത്തിക്കുന്നു."],
+      ["Discrepancy", "Noun", "പൊരുത്തക്കേട് / വ്യത്യാസം", "We noticed a small discrepancy in the final bill.", "അവസാന ബില്ലിൽ ചെറിയൊരു പൊരുത്തക്കേട് ഞങ്ങൾ ശ്രദ്ധിച്ചു."],
+      ["Embrace", "Verb", "സ്വീകരിക്കുക / ആശ്ലേഷിക്കുക", "Embrace mistakes as a natural step in learning English.", "ഇംഗ്ലീഷ് പഠനത്തിലെ സ്വാഭാവിക ഘട്ടമായി തെറ്റുകളെ സ്വീകരിക്കുക."],
+      ["Frugal", "Adj", "മിതവ്യയമുള്ള / പണം സൂക്ഷിച്ചു ചെലവാക്കുന്ന", "Being frugal helps you invest in important goals.", "മിതവ്യയം പാലിക്കുന്നത് പ്രധാന ലക്ഷ്യങ്ങളിൽ നിക്ഷേപിക്കാൻ സഹായിക്കുന്നു."],
+      ["Genuine", "Adj", "സത്യസന്ധമായ / കലർപ്പില്ലാത്ത", "She showed genuine interest in helping newcomers.", "പുതുതായി വന്നവരെ സഹായിക്കുന്നതിൽ അവൾ സത്യസന്ധമായ താല്പര്യം കാണിച്ചു."],
+      ["Shelter", "Noun", "അഭയം / സംരക്ഷണം", "The cabin provided warm shelter during the storm.", "കൊടുങ്കാറ്റ് സമയത്ത് ആ ചെറിയ വീട് ചൂടുള്ള അഭയം നൽകി."],
+      ["Inevitable", "Adj", "തടയാനാവാത്ത", "Progress is inevitable when you practice every day.", "എല്ലാ ദിവസവും പരിശീലിക്കുമ്പോൾ പുരോഗതി ഉറപ്പാണ്."],
+      ["Jubilant", "Adj", "അത്യധികം സന്തോഷമുള്ള", "The team was jubilant after winning the championship.", "ചാമ്പ്യൻഷിപ്പ് നേടിയ ശേഷം ടീം അത്യധികം സന്തോഷത്തിലായിരുന്നു."],
+
+      // Day 6
+      ["Advocate", "Verb", "പിന്തുണയ്ക്കുക / വാദിക്കുക", "Teachers advocate daily reading for strong vocabulary.", "മികച്ച പദസമ്പത്തിനായി അധ്യാപകർ ദിവസേനയുള്ള വായനയെ പിന്തുണയ്ക്കുന്നു."],
+      ["Beacon", "Noun", "വഴികാട്ടി വിളക്ക് / പ്രതീക്ഷയുടെ കിരണം", "The lighthouse acted as a beacon for ships at night.", "രാത്രിയിൽ കപ്പലുകൾക്ക് വിളക്കുമാടം ഒരു വഴികാട്ടിയായി പ്രവർത്തിച്ചു."],
+      ["Compel", "Verb", "നിർബന്ധിതമാക്കുക", "Strong curiosity can compel you to explore new ideas.", "ശക്തമായ ആകാംക്ഷ പുതിയ ആശയങ്ങൾ തേടാൻ നിങ്ങളെ പ്രേരിപ്പിക്കും."],
+      ["Dedicate", "Verb", "സമർപ്പിക്കുക / മാറ്റിവെക്കുക", "Dedicate fifteen minutes every morning to learning.", "എല്ലാ ദിവസവും രാവിലെ പതിനഞ്ച് മിനിറ്റ് പഠനത്തിനായി മാറ്റിവെക്കുക."],
+      ["Elaborate", "Verb", "വിശദീകരിക്കുക", "Please elaborate on how this system works.", "ഈ സംവിധാനം എങ്ങനെ പ്രവർത്തിക്കുന്നു എന്ന് ദയവായി വിശദീകരിക്കുക."],
+      ["Fluctuate", "Verb", "കയറിയിറങ്ങുക / മാറ്റം വന്നുകൊണ്ടിരിക്കുക", "Temperatures fluctuate between day and night in the desert.", "മരുഭൂമിയിൽ പകലും രാത്രിയും താപനിലയിൽ വലിയ മാറ്റം വരുന്നു."],
+      ["Grasp", "Verb", "മനസ്സിലാക്കുക / മുറുകെ പിടിക്കുക", "Once you grasp the basic rule, the rest becomes easy.", "അടിസ്ഥാന നിയമം മനസ്സിലാക്കിക്കഴിഞ്ഞാൽ ബാക്കിയുള്ളവ എളുപ്പമാകും."],
+      ["Harmony", "Noun", "ഐക്യം / യോജിപ്പ്", "Colors and fonts should work together in harmony.", "നിറങ്ങളും അക്ഷരങ്ങളും പരസ്പരം യോജിപ്പോടെ പ്രവർത്തിക്കണം."],
+      ["Incentive", "Noun", "പ്രോത്സാഹനം / പ്രേരണ", "A daily streak gives learners a clear incentive to return.", "ദിവസേനയുള്ള സ്ട്രീക്ക് പഠിതാക്കൾക്ക് തിരികെ വരാൻ പ്രോത്സാഹനം നൽകുന്നു."],
+      ["Sculpt", "Verb", "രൂപപ്പെടുത്തുക / കൊത്തിയെടുക്കുക", "Consistent practice helps sculpt your communication skills.", "തുടർച്ചയായ പരിശീലനം നിങ്ങളുടെ ആശയവിനിമയ ശേഷിയെ രൂപപ്പെടുത്തുന്നു."],
+
+      // Day 7
+      ["Altruistic", "Adj", "നിസ്വാർത്ഥമായ", "Sharing free knowledge is an altruistic act.", "സൗജന്യമായി അറിവ് പങ്കുവെക്കുന്നത് നിസ്വാർത്ഥമായ പ്രവൃത്തിയാണ്."],
+      ["Catalyst", "Noun", "ഉത്തേജകം / മാറ്റത്തിന് കാരണമാകുന്നത്", "A good mentor can be a catalyst for rapid growth.", "ഒരു നല്ല ഗുരു വേഗത്തിലുള്ള വളർച്ചയ്ക്ക് ഉത്തേജകമാകും."],
+      ["Diminish", "Verb", "കുറയുക / ക്ഷയിക്കുക", "Fear will diminish as your confidence grows.", "നിങ്ങളുടെ ആത്മവിശ്വാസം വളരുന്നതിനനുസരിച്ച് ഭയം കുറയും."],
+      ["Exemplify", "Verb", "ഉദാഹരണമായി കാണിക്കുക", "Her daily discipline exemplifies true commitment.", "അവളുടെ ദൈനംദിന അച്ചടക്കം യഥാർത്ഥ പ്രതിബദ്ധതയ്ക്ക് ഉദാഹരണമാണ്."],
+      ["Fortitude", "Noun", "മനോധൈര്യം / സഹനശക്തി", "He faced every challenge with quiet fortitude.", "അവൻ എല്ലാ വെല്ലുവിളികളെയും ശാന്തമായ മനോധൈര്യത്തോടെ നേരിട്ടു."],
+      ["Gregarious", "Adj", "സാമൂഹികമായി ഇടപഴകാൻ ഇഷ്ടപ്പെടുന്ന", "Gregarious people enjoy group discussions and events.", "കൂട്ടായ ചർച്ചകളും പരിപാടികളും ഇഷ്ടപ്പെടുന്നവരാണ് സാമൂഹികമായി ഇടപഴകുന്നവർ."],
+      ["Hypothesis", "Noun", "അനുമാനം / പരീക്ഷണാർത്ഥമുള്ള ആശയം", "We tested our hypothesis with real learners.", "യഥാർത്ഥ പഠിതാക്കളെ വെച്ച് ഞങ്ങൾ ഞങ്ങളുടെ അനുമാനം പരീക്ഷിച്ചു."],
+      ["Arid", "Adj", "വരണ്ട / മഴയില്ലാത്ത", "Cactus plants survive easily in arid climates.", "വരണ്ട കാലാവസ്ഥയിൽ കള്ളിച്ചെടികൾ എളുപ്പത്തിൽ അതിജീവിക്കുന്നു."],
+      ["Juxtapose", "Verb", "താരതമ്യത്തിനായി അടുത്തടുത്ത് വെക്കുക", "Juxtapose the two sentences to see the difference.", "വ്യത്യാസം കാണാൻ രണ്ട് വാക്യങ്ങളും അടുത്തടുത്ത് വെച്ച് നോക്കുക."],
+      ["Kinetic", "Adj", "ചലനാത്മകമായ / ഊർജ്ജസ്വലമായ", "The classroom had a kinetic, energetic atmosphere.", "ക്ലാസ്സ്മുറിയിൽ വളരെ ഊർജ്ജസ്വലമായ അന്തരീക്ഷമായിരുന്നു."],
+
+      // Day 8
+      ["Articulate", "Adj", "വ്യക്തമായി ആശയങ്ങൾ അവതരിപ്പിക്കുന്ന", "Reading aloud helps you become more articulate.", "ഉറക്കെ വായിക്കുന്നത് ആശയങ്ങൾ വ്യക്തമായി അവതരിപ്പിക്കാൻ സഹായിക്കുന്നു."],
+      ["Brevity", "Noun", "ചുരുക്കം / സംക്ഷിപ്തത", "Brevity makes messages memorable and impactful.", "ചുരുക്കി പറയുന്നത് സന്ദേശങ്ങളെ ഓർമ്മയിൽ നിൽക്കുന്നതും ഫലപ്രദവുമാക്കുന്നു."],
+      ["Coherent", "Adj", "യുക്തിസഹവും വ്യക്തവുമായ", "Organize your thoughts into a coherent paragraph.", "നിങ്ങളുടെ ചിന്തകളെ വ്യക്തമായ ഒരു ഖണ്ഡികയായി ക്രമീകരിക്കുക."],
+      ["Daunting", "Adj", "ഭയപ്പെടുത്തുന്ന / ബുദ്ധിമുട്ടായി തോന്നുന്ന", "Learning 200 words looks daunting until you break it into days.", "ദിവസങ്ങളായി തിരിക്കുന്നത് വരെ 200 വാക്കുകൾ പഠിക്കുന്നത് ബുദ്ധിമുട്ടായി തോന്നാം."],
+      ["Empirical", "Adj", "അനുഭവത്തിലൂടെ തെളിയിക്കപ്പെട്ട", "Spaced repetition is backed by empirical research.", "ഇടവിട്ടുള്ള ആവർത്തനം ശാസ്ത്രീയ പരീക്ഷണങ്ങളിലൂടെ തെളിയിക്കപ്പെട്ടതാണ്."],
+      ["Cascade", "Noun", "വെള്ളച്ചാട്ടം / തുടർച്ചയായ പ്രവാഹം", "A cascade of fresh ideas followed the brainstorming session.", "ചർച്ചയ്ക്ക് പിന്നാലെ പുതിയ ആശയങ്ങളുടെ ഒരു പ്രവാഹം തന്നെയുണ്ടായി."],
+      ["Gratify", "Verb", "തൃപ്തിപ്പെടുത്തുക / സന്തോഷിപ്പിക്കുക", "It will gratify you to see your progress bar reach 100%.", "നിങ്ങളുടെ പുരോഗതി 100% എത്തുന്നത് കാണുന്നത് നിങ്ങളെ സന്തോഷിപ്പിക്കും."],
+      ["Humble", "Adj", "വിനയമുള്ള", "Even after great success, she remained humble.", "വലിയ വിജയത്തിന് ശേഷവും അവൾ വിനയമുള്ളവളായി തുടർന്നു."],
+      ["Imminent", "Adj", "ആസന്നമായ / ഉടൻ സംഭവിക്കാനിരിക്കുന്ന", "Dark clouds warned that rain was imminent.", "മഴ ഉടൻ പെയ്യുമെന്ന് കറുത്ത മേഘങ്ങൾ മുന്നറിയിപ്പ് നൽകി."],
+      ["Mosaic", "Noun", "പല കഷ്ണങ്ങൾ ചേർന്ന മനോഹര ചിത്രം", "A language is a mosaic of thousands of expressive words.", "ആയിരക്കണക്കിന് വാക്കുകൾ ചേർന്ന മനോഹരമായ ഒരു ചിത്രമാണ് ഭാഷ."],
+
+      // Day 9
+      ["Aspire", "Verb", "ഉയർന്ന ലക്ഷ്യം വെക്കുക / ആഗ്രഹിക്കുക", "Many learners aspire to speak English fluently at work.", "ജോലിസ്ഥലത്ത് ഒഴുക്കോടെ ഇംഗ്ലീഷ് സംസാരിക്കാൻ പലരും ആഗ്രഹിക്കുന്നു."],
+      ["Bolster", "Verb", "ശക്തിപ്പെടുത്തുക / പിന്തുണ നൽകുക", "Examples bolster your understanding of new words.", "ഉദാഹരണങ്ങൾ പുതിയ വാക്കുകളെക്കുറിച്ചുള്ള നിങ്ങളുടെ ധാരണ ശക്തിപ്പെടുത്തുന്നു."],
+      ["Contemplate", "Verb", "ആഴത്തിൽ ചിന്തിക്കുക", "Take a moment to contemplate the meaning of the quote.", "ആ ഉദ്ധരണിയുടെ അർത്ഥം ആഴത്തിൽ ചിന്തിക്കാൻ ഒരു നിമിഷം എടുക്കുക."],
+      ["Deviate", "Verb", "വ്യതിചലിക്കുക / വഴിമാറുക", "Try not to deviate from your daily study schedule.", "നിങ്ങളുടെ ദൈനംദിന പഠന സമയക്രമത്തിൽ നിന്ന് വഴിമാറാതിരിക്കാൻ ശ്രമിക്കുക."],
+      ["Emerge", "Verb", "പുറത്തുവരിക / ഉയർന്നുവരിക", "New patterns emerge when you review words regularly.", "വാക്കുകൾ പതിവായി ആവർത്തിക്കുമ്പോൾ പുതിയ പാറ്റേണുകൾ തെളിഞ്ഞുവരും."],
+      ["Facilitate", "Verb", "എളുപ്പമാക്കുക / സൗകര്യമൊരുക്കുക", "Visual cards facilitate faster memory recall.", "ചിത്രങ്ങളുള്ള കാർഡുകൾ വേഗത്തിലുള്ള ഓർമ്മപ്പെടുത്തൽ എളുപ്പമാക്കുന്നു."],
+      ["Gregarious", "Adj", "സൗഹൃദപരമായ", "A gregarious host makes every guest feel welcome.", "സൗഹൃദപരമായ ആതിഥേയൻ എല്ലാ അതിഥികളെയും സന്തോഷിപ്പിക്കുന്നു."],
+      ["Haphazard", "Adj", "ക്രമരഹിതമായ / അടുക്കും ചിട്ടയുമില്ലാത്ത", "Haphazard studying leads to quick forgetting.", "അടുക്കും ചിട്ടയുമില്ലാത്ത പഠനം വേഗത്തിൽ മറക്കാൻ ഇടയാക്കും."],
+      ["Illuminate", "Verb", "വെളിച്ചം വീശുക", "Real-life examples illuminate subtle differences in meaning.", "ജീവിതത്തിലെ ഉദാഹരണങ്ങൾ അർത്ഥവ്യത്യാസങ്ങളിലേക്ക് വെളിച്ചം വീശുന്നു."],
+      ["Lucid", "Adj", "വളരെ വ്യക്തവും തെളിഞ്ഞതുമായ", "The guide explains complex grammar in a lucid style.", "സങ്കീർണ്ണമായ വ്യാകരണം വളരെ തെളിഞ്ഞ ശൈലിയിൽ ഈ ഗൈഡ് വിശദീകരിക്കുന്നു."],
+
+      // Day 10
+      ["Acquire", "Verb", "നേടിയെടുക്കുക / ആർജ്ജിക്കുക", "You acquire vocabulary naturally through active usage.", "സജീവമായ ഉപയോഗത്തിലൂടെ നിങ്ങൾ സ്വാഭാവികമായി പദസമ്പത്ത് നേടിയെടുക്കുന്നു."],
+      ["Benchmark", "Noun", "നിലവാര അളവുകോൽ", "Completing 100 words is a great benchmark for your first month.", "ആദ്യ മാസത്തിൽ 100 വാക്കുകൾ പൂർത്തിയാക്കുന്നത് മികച്ചൊരു നാഴികക്കല്ലാണ്."],
+      ["Cultivate", "Verb", "വളർത്തിയെടുക്കുക / പരിപോഷിപ്പിക്കുക", "Cultivate the habit of reviewing weak words before sleep.", "ഉറങ്ങുന്നതിന് മുൻപ് പ്രയാസമുള്ള വാക്കുകൾ ആവർത്തിക്കുന്ന ശീലം വളർത്തിയെടുക്കുക."],
+      ["Discern", "Verb", "തിരിച്ചറിയുക / വേർതിരിച്ചറിയുക", "With practice, you can discern the right word instantly.", "പരിശീലനത്തിലൂടെ നിങ്ങൾക്ക് ശരിയായ വാക്ക് ഉടൻ തിരിച്ചറിയാൻ കഴിയും."],
+      ["Endure", "Verb", "സഹിക്കുക / നിലനിൽക്കുക", "Knowledge gained through recall will endure for years.", "ഓർത്തെടുക്കലിലൂടെ നേടിയ അറിവ് വർഷങ്ങളോളം നിലനിൽക്കും."],
+      ["Foster", "Verb", "പ്രോത്സാഹിപ്പിക്കുക / വളർത്തുക", "Small daily wins foster long-term motivation.", "ചെറിയ ദൈനംദിന വിജയങ്ങൾ ദീർഘകാല പ്രചോദനം വളർത്തുന്നു."],
+      ["Gravitate", "Verb", "ആകർഷിക്കപ്പെടുക / ചായ്‌വ് കാണിക്കുക", "Learners gravitate toward clean, distraction-free apps.", "വൃത്തിയുള്ളതും ശ്രദ്ധ തിരിക്കാത്തതുമായ ആപ്പുകളിലേക്ക് പഠിതാക്കൾ ആകർഷിക്കപ്പെടുന്നു."],
+      ["Heighten", "Verb", "വർദ്ധിപ്പിക്കുക / തീവ്രമാക്കുക", "Quizzes heighten focus during study sessions.", "പഠന സമയത്ത് ക്വിസുകൾ ശ്രദ്ധ വർദ്ധിപ്പിക്കുന്നു."],
+      ["Integrate", "Verb", "സംയോജിപ്പിക്കുക / കൂട്ടിച്ചേർക്കുക", "Integrate new words into your everyday conversations.", "നിങ്ങളുടെ ദൈനംദിന സംഭാഷണങ്ങളിൽ പുതിയ വാക്കുകൾ കൂട്ടിച്ചേർക്കുക."],
+      ["Milestone", "Noun", "നാഴികക്കല്ല് / പ്രധാന നേട്ടം", "Day 10 marks the halfway milestone of your journey!", "പത്താം ദിവസം നിങ്ങളുടെ പഠനയാത്രയുടെ പകുതി ദൂരം പിന്നിടുന്ന നാഴികക്കല്ലാണ്!"],
+
+      // Day 11 - 20 (Generated cleanly with rich Malayalam & context)
+      ["Meticulous", "Adj", "സൂക്ഷ്മതയുള്ള / അതീവ ശ്രദ്ധയുള്ള", "Meticulous planning prevents last-minute errors.", "സൂക്ഷ്മമായ ആസൂത്രണം അവസാന നിമിഷത്തെ പിഴവുകൾ ഒഴിവാക്കുന്നു."],
+      ["Nuance", "Noun", "സൂക്ഷ്മമായ അർത്ഥവ്യത്യാസം", "Understanding nuance helps you sound like a fluent speaker.", "സൂക്ഷ്മമായ അർത്ഥവ്യത്യാസങ്ങൾ മനസ്സിലാക്കുന്നത് ഒഴുക്കോടെ സംസാരിക്കാൻ സഹായിക്കുന്നു."],
+      ["Optimistic", "Adj", "ശുഭാപ്തിവിശ്വാസമുള്ള", "Stay optimistic even when a word takes extra tries.", "ഒരു വാക്ക് പഠിക്കാൻ കൂടുതൽ ശ്രമങ്ങൾ വേണ്ടിവന്നാലും ശുഭാപ്തിവിശ്വാസം നിലനിർത്തുക."],
+      ["Persevere", "Verb", "സ്ഥിരോത്സാഹത്തോടെ തുടരുക", "Those who persevere always master the language.", "സ്ഥിരോത്സാഹത്തോടെ തുടരുന്നവർ എപ്പോഴും ഭാഷയിൽ പ്രാവീണ്യം നേടുന്നു."],
+      ["Quintessential", "Adj", "ഏറ്റവും മികച്ച ഉദാഹരണമായ", "Patience is the quintessential trait of a great teacher.", "ക്ഷമ എന്നത് ഒരു മികച്ച അധ്യാപകന്റെ ഏറ്റവും പ്രധാന ഗുണമാണ്."],
+      ["Rectify", "Verb", "തിരുത്തുക / ശരിയാക്കുക", "Immediate feedback helps you rectify mistakes fast.", "ഉടനടിയുള്ള ഫീഡ്‌ബാക്ക് തെറ്റുകൾ വേഗത്തിൽ തിരുത്താൻ സഹായിക്കുന്നു."],
+      ["Scrutinize", "Verb", "സൂക്ഷ്മമായി പരിശോധിക്കുക", "Scrutinize the spelling before submitting your answer.", "ഉത്തരം നൽകുന്നതിന് മുൻപ് സ്പെല്ലിംഗ് സൂക്ഷ്മമായി പരിശോധിക്കുക."],
+      ["Tangible", "Adj", "വ്യക്തമായി കാണാവുന്ന / സ്പർശിക്കാവുന്ന", "Your certificate is a tangible reward for your effort.", "നിങ്ങളുടെ സർട്ടിഫിക്കറ്റ് നിങ്ങളുടെ പ്രയത്നത്തിനുള്ള വ്യക്തമായ പ്രതിഫലമാണ്."],
+      ["Unanimous", "Adj", "ഏകകണ്ഠമായ", "The team reached a unanimous decision on the design.", "ഡിസൈനിന്റെ കാര്യത്തിൽ ടീം ഏകകണ്ഠമായ തീരുമാനത്തിലെത്തി."],
+      ["Vivid", "Adj", "വ്യക്തവും ജീവസ്സുറ്റതുമായ", "Images create vivid memories in the human brain.", "ചിത്രങ്ങൾ മനുഷ്യമസ്തിഷ്കത്തിൽ ജീവസ്സുറ്റ ഓർമ്മകൾ സൃഷ്ടിക്കുന്നു."],
+
+      // Day 12
+      ["Abstain", "Verb", "വിട്ടുനിൽക്കുക / ഒഴിവാക്കുക", "Abstain from checking hints until you try recalling.", "ഓർത്തെടുക്കാൻ ശ്രമിക്കുന്നത് വരെ സൂചനകൾ നോക്കുന്നതിൽ നിന്ന് വിട്ടുനിൽക്കുക."],
+      ["Brevity", "Noun", "സംക്ഷിപ്തത", "Good headlines rely on clarity and brevity.", "മികച്ച തലക്കെട്ടുകൾ വ്യക്തതയെയും സംക്ഷിപ്തതയെയും ആശ്രയിച്ചിരിക്കുന്നു."],
+      ["Concur", "Verb", "യോജിക്കുക / സമ്മതിക്കുക", "Experts concur that active recall beats passive reading.", "വെറുതെ വായിക്കുന്നതിനേക്കാൾ മികച്ചത് ഓർത്തെടുക്കലാണെന്ന് വിദഗ്ധർ യോജിക്കുന്നു."],
+      ["Defer", "Verb", "മാറ്റിവെക്കുക", "Do not defer today's ten words until tomorrow.", "ഇന്നത്തെ പത്ത് വാക്കുകൾ നാളത്തേക്ക് മാറ്റിവെക്കരുത്."],
+      ["Epitome", "Noun", "പരമകാഷ്ഠ / തികഞ്ഞ ഉദാഹരണം", "The app is the epitome of clean, modern design.", "വൃത്തിയുള്ളതും ആധുനികവുമായ ഡിസൈനിന്റെ തികഞ്ഞ ഉദാഹരണമാണ് ഈ ആപ്പ്."],
+      ["Formidable", "Adj", "ശക്തമായ / അതിശയിപ്പിക്കുന്ന", "Two hundred words form a formidable vocabulary base.", "ഇരുന്നൂറ് വാക്കുകൾ ശക്തമായ ഒരു പദസമ്പത്തിന് അടിത്തറയാകുന്നു."],
+      ["Gratifying", "Adj", "സംതൃപ്തി നൽകുന്ന", "Watching your weak list shrink is deeply gratifying.", "പ്രയാസമുള്ള വാക്കുകളുടെ പട്ടിക കുറയുന്നത് കാണുന്നത് സംതൃപ്തി നൽകുന്നു."],
+      ["Herald", "Verb", "വിളിച്ചറിയിക്കുക / തുടക്കം കുറിക്കുക", "New skills often herald fresh career opportunities.", "പുതിയ കഴിവുകൾ പലപ്പോഴും പുതിയ തൊഴിലവസരങ്ങൾക്ക് തുടക്കം കുറിക്കുന്നു."],
+      ["Imperative", "Adj", "അത്യന്താപേക്ഷിതമായ", "Daily consistency is imperative for memory retention.", "ഓർമ്മ നിലനിർത്താൻ ദിവസേനയുള്ള തുടർച്ച അത്യന്താപേക്ഷിതമാണ്."],
+      ["Judicious", "Adj", "വിവേകപൂർണ്ണമായ", "Make judicious use of your spare five minutes.", "നിങ്ങളുടെ ഒഴിവുള്ള അഞ്ച് മിനിറ്റ് വിവേകപൂർവ്വം ഉപയോഗിക്കുക."],
+
+      // Day 13
+      ["Adept", "Adj", "വിദഗ്ധനായ / സമർത്ഥനായ", "You will soon become adept at spotting root meanings.", "വാക്കുകളുടെ അടിസ്ഥാന അർത്ഥം കണ്ടെത്തുന്നതിൽ നിങ്ങൾ ഉടൻ സമർത്ഥനാകും."],
+      ["Bolster", "Verb", "ബലപ്പെടുത്തുക", "Audio pronunciation bolsters listening comprehension.", "ശബ്ദ ഉച്ചാരണം കേട്ടു മനസ്സിലാക്കാനുള്ള കഴിവിനെ ബലപ്പെടുത്തുന്നു."],
+      ["Concise", "Adj", "ചുരുക്കിയ", "Write a concise summary of what you learned today.", "ഇന്ന് പഠിച്ച കാര്യങ്ങളുടെ ചുരുക്കിയ സംഗ്രഹം എഴുതുക."],
+      ["Delineate", "Verb", "വ്യക്തമായി വരച്ചുകാട്ടുക", "The dashboard delineates your daily and overall progress.", "ഡാഷ്‌ബോർഡ് നിങ്ങളുടെ ദൈനംദിനവും മൊത്തത്തിലുള്ളതുമായ പുരോഗതി വ്യക്തമാക്കുന്നു."],
+      ["Elucidate", "Verb", "വിശദമാക്കി വ്യക്തമാക്കുക", "Context sentences elucidate how a word behaves.", "സന്ദർഭ വാക്യങ്ങൾ ഒരു വാക്ക് എങ്ങനെ ഉപയോഗിക്കണമെന്ന് വ്യക്തമാക്കുന്നു."],
+      ["Fathom", "Verb", "ആഴത്തിൽ മനസ്സിലാക്കുക", "It is easy to fathom a word when paired with a visual.", "ഒരു ചിത്രവുമായി ചേർത്ത് വെക്കുമ്പോൾ വാക്ക് മനസ്സിലാക്കാൻ എളുപ്പമാണ്."],
+      ["Galvanize", "Verb", "പ്രചോദിപ്പിക്കുക / ഉണർത്തുക", "A clear goal can galvanize you into daily action.", "വ്യക്തമായ ഒരു ലക്ഷ്യം നിങ്ങളെ ദൈനംദിന പ്രവർത്തനത്തിലേക്ക് ഉണർത്തും."],
+      ["Harbinger", "Noun", "മുന്നോടി / സൂചന", "Fluency in key words is a harbinger of confident speech.", "പ്രധാന വാക്കുകളിലുള്ള പ്രാവീണ്യം ആത്മവിശ്വാസത്തോടെയുള്ള സംസാരത്തിന്റെ മുന്നോടിയാണ്."],
+      ["Innate", "Adj", "ജന്മസിദ്ധമായ / സ്വാഭാവികമായ", "Humans have an innate ability to remember stories.", "കഥകൾ ഓർത്തിരിക്കാൻ മനുഷ്യർക്ക് സ്വാഭാവികമായ കഴിവുണ്ട്."],
+      ["Juxtaposition", "Noun", "താരതമ്യപ്പെടുത്തൽ", "The juxtaposition of English and Malayalam speeds learning.", "ഇംഗ്ലീഷും മലയാളവും അടുത്തടുത്ത് വരുന്നത് പഠനം വേഗത്തിലാക്കുന്നു."],
+
+      // Day 14
+      ["Alacrity", "Noun", "ഉത്സാഹം / സന്നദ്ധത", "She accepted the learning challenge with alacrity.", "അവൾ ആ പഠന വെല്ലുവിളി വലിയ ഉത്സാഹത്തോടെ ഏറ്റെടുത്തു."],
+      ["Benevolence", "Noun", "ദയ / പരോപകാര മനസ്സ്", "Acts of benevolence build strong communities.", "ദയാപ്രവൃത്തികൾ ശക്തമായ സമൂഹങ്ങളെ കെട്ടിപ്പടുക്കുന്നു."],
+      ["Cogent", "Adj", "യുക്തിഭദ്രവും ബോധ്യപ്പെടുത്തുന്നതുമായ", "He presented a cogent argument during the meeting.", "യോഗത്തിൽ അവൻ യുക്തിഭദ്രമായ ഒരു വാദം അവതരിപ്പിച്ചു."],
+      ["Dexterous", "Adj", "കൈവഴക്കമുള്ള / സമർത്ഥമായ", "Dexterous thinkers connect new words to old memories.", "സമർത്ഥരായ ചിന്തകർ പുതിയ വാക്കുകളെ പഴയ ഓർമ്മകളുമായി ബന്ധിപ്പിക്കുന്നു."],
+      ["Effervescent", "Adj", "ഉന്മേഷഭരിതമായ / തിളങ്ങുന്ന", "Her effervescent energy made the workshop lively.", "അവളുടെ ഉന്മേഷഭരിതമായ ഊർജ്ജം ശില്പശാലയെ സജീവമാക്കി."],
+      ["Fastidious", "Adj", "സൂക്ഷ്മത നിർബന്ധമുള്ള", "Be fastidious about spelling during Stage 3 recall.", "മൂന്നാം ഘട്ടത്തിലെ ഓർത്തെടുക്കലിൽ സ്പെല്ലിംഗിന്റെ കാര്യത്തിൽ സൂക്ഷ്മത പാലിക്കുക."],
+      ["Gregarious", "Adj", "കൂട്ടുകൂടാൻ ഇഷ്ടപ്പെടുന്ന", "Practice speaking with gregarious friends to build fluency.", "ഒഴുക്ക് വർദ്ധിപ്പിക്കാൻ സംസാരിക്കാൻ ഇഷ്ടപ്പെടുന്ന സുഹൃത്തുക്കളോടൊപ്പം പരിശീലിക്കുക."],
+      ["Halcyon", "Adj", "ശാന്തവും സന്തോഷകരവുമായ", "They recalled the halcyon days of their student life.", "വിദ്യാർത്ഥി ജീവിതത്തിലെ ശാന്തവും സന്തോഷകരവുമായ ദിനങ്ങൾ അവർ ഓർത്തു."],
+      ["Idyllic", "Adj", "മനോഹരവും ശാന്തവുമായ", "A quiet balcony is an idyllic spot for morning study.", "രാവിലത്തെ പഠനത്തിന് ശാന്തമായ ബാൽക്കണി മനോഹരമായ ഇടമാണ്."],
+      ["Kindred", "Adj", "സമാന ചിന്താഗതിയുള്ള", "Learners often find kindred spirits in study groups.", "പഠന ഗ്രൂപ്പുകളിൽ സമാന ചിന്താഗതിയുള്ളവരെ കണ്ടെത്താൻ സാധിക്കുന്നു."],
+
+      // Day 15
+      ["Accolade", "Noun", "ബഹുമതി / പ്രശംസ", "Finishing 15 days deserves a genuine accolade.", "പതിനഞ്ച് ദിവസം പൂർത്തിയാക്കുന്നത് വലിയ പ്രശംസ അർഹിക്കുന്നു."],
+      ["Buoyant", "Adj", "ഉല്ലാസഭരിതമായ / പൊങ്ങിക്കിടക്കുന്ന", "Keep a buoyant spirit as you enter the final stretch.", "അവസാന ഘട്ടത്തിലേക്ക് കടക്കുമ്പോൾ ഉല്ലാസഭരിതമായ മനസ്സ് നിലനിർത്തുക."],
+      ["Conducive", "Adj", "അനുകൂലമായ / സഹായകമായ", "A calm environment is conducive to deep focus.", "ശാന്തമായ അന്തരീക്ഷം ആഴത്തിലുള്ള ഏകാഗ്രതയ്ക്ക് അനുകൂലമാണ്."],
+      ["Disseminate", "Verb", "പ്രചരിപ്പിക്കുക / പങ്കുവെക്കുക", "Good apps disseminate practical knowledge effortlessly.", "മികച്ച ആപ്പുകൾ പ്രായോഗിക അറിവ് അനായാസമായി പങ്കുവെക്കുന്നു."],
+      ["Encompass", "Verb", "ഉൾക്കൊള്ളുക", "These 200 words encompass vital everyday themes.", "ഈ 200 വാക്കുകൾ പ്രധാനപ്പെട്ട ദൈനംദിന വിഷയങ്ങളെ ഉൾക്കൊള്ളുന്നു."],
+      ["Fidelity", "Noun", "കൃത്യത / വിശ്വസ്തത", "Audio clarity ensures high fidelity in pronunciation.", "ശബ്ദ വ്യക്തത ഉച്ചാരണത്തിൽ കൃത്യത ഉറപ്പാക്കുന്നു."],
+      ["Glean", "Verb", "ശേഖരിക്കുക / മനസ്സിലാക്കിയെടുക്കുക", "You can glean valuable insights from example sentences.", "ഉദാഹരണ വാക്യങ്ങളിൽ നിന്ന് വിലപ്പെട്ട ഉൾക്കാഴ്ചകൾ നേടിയെടുക്കാം."],
+      ["Hub", "Noun", "കേന്ദ്രം", "CV LexiSpark is your central hub for English mastery.", "ഇംഗ്ലീഷ് പ്രാവീണ്യത്തിനുള്ള നിങ്ങളുടെ പ്രധാന കേന്ദ്രമാണ് CV LexiSpark."],
+      ["Incisive", "Adj", "കൂർമ്മബുദ്ധിയുള്ള / വ്യക്തമായ", "Her incisive question solved the confusion immediately.", "അവളുടെ വ്യക്തമായ ചോദ്യം ആശയക്കുഴപ്പം ഉടൻ പരിഹരിച്ചു."],
+      ["Luminous", "Adj", "പ്രകാശമാനമായ", "Luminous clarity comes from repeated active practice.", "ആവർത്തിച്ചുള്ള പരിശീലനത്തിലൂടെ തെളിഞ്ഞ വ്യക്തത കൈവരുന്നു."],
+
+      // Day 16
+      ["Ameliorate", "Verb", "മെച്ചപ്പെടുത്തുക / നന്നാക്കുക", "Daily review will ameliorate weak recall areas.", "ദിവസേനയുള്ള ആവർത്തനം ഓർമ്മക്കുറവുള്ള ഭാഗങ്ങൾ മെച്ചപ്പെടുത്തും."],
+      ["Bespoke", "Adj", "പ്രത്യേകമായി തയ്യാറാക്കിയ", "This is a bespoke learning path built for fast retention.", "വേഗത്തിൽ ഓർമ്മയിൽ നിൽക്കാൻ പ്രത്യേകമായി തയ്യാറാക്കിയ പഠനപാതയാണിത്."],
+      ["Conduit", "Noun", "മാധ്യമം / ചാൽ", "Language is the primary conduit for human connection.", "മനുഷ്യബന്ധങ്ങൾക്കുള്ള പ്രധാന മാധ്യമമാണ് ഭാഷ."],
+      ["Deft", "Adj", "സാമർത്ഥ്യമുള്ള / വേഗതയുള്ള", "With deft practice, recalling meanings becomes automatic.", "സാമർത്ഥ്യത്തോടെയുള്ള പരിശീലനത്തിലൂടെ അർത്ഥങ്ങൾ ഓർത്തെടുക്കുന്നത് സ്വാഭാവികമാകും."],
+      ["Emulate", "Verb", "അനുകരിക്കുക / മാതൃകയാക്കുക", "Listen to the audio and emulate the natural rhythm.", "ഓഡിയോ കേട്ട് അതിന്റെ സ്വാഭാവിക താളം അനുകരിക്കുക."],
+      ["Finesse", "Noun", "സൂക്ഷ്മമായ വൈദഗ്ധ്യം", "Using the right word adds finesse to your writing.", "ശരിയായ വാക്ക് ഉപയോഗിക്കുന്നത് നിങ്ങളുടെ എഴുത്തിന് വൈദഗ്ധ്യം നൽകുന്നു."],
+      ["Genesis", "Noun", "ഉത്ഭവം / തുടക്കം", "Every fluent speaker had their genesis in basic words.", "ഓരോ മികച്ച പ്രഭാഷകന്റെയും തുടക്കം അടിസ്ഥാന വാക്കുകളിലായിരുന്നു."],
+      ["Holistic", "Adj", "സമഗ്രമായ", "Seeing, hearing, and typing create a holistic memory.", "കാണുന്നതും കേൾക്കുന്നതും ടൈപ്പ് ചെയ്യുന്നതും സമഗ്രമായ ഓർമ്മ സൃഷ്ടിക്കുന്നു."],
+      ["Impetus", "Noun", "പ്രചോദനം / ഊർജ്ജം", "Your streak acts as an impetus to keep moving forward.", "മുന്നോട്ട് പോകാനുള്ള ഊർജ്ജമായി നിങ്ങളുടെ സ്ട്രീക്ക് പ്രവർത്തിക്കുന്നു."],
+      ["Keystone", "Noun", "ആണിക്കല്ല് / പ്രധാന ഘടകം", "Recall is the keystone of permanent vocabulary.", "സ്ഥിരമായ പദസമ്പത്തിന്റെ ആണിക്കല്ലാണ് ഓർത്തെടുക്കൽ."],
+
+      // Day 17
+      ["Auspicious", "Adj", "ശുഭകരമായ / അനുകൂലമായ", "Starting a new habit today is an auspicious step.", "ഇന്ന് പുതിയൊരു ശീലം തുടങ്ങുന്നത് ശുഭകരമായ ചുവടുവെപ്പാണ്."],
+      ["Cognizant", "Adj", "ബോധവാനായ / അറിവുള്ള", "Be cognizant of words that frequently trip you up.", "നിങ്ങൾക്ക് പലപ്പോഴും തെറ്റുന്ന വാക്കുകളെക്കുറിച്ച് ബോധവാനായിരിക്കുക."],
+      ["Distill", "Verb", "സത്ത വേർതിരിച്ചെടുക്കുക", "Each card distills a word down to its clearest essence.", "ഓരോ കാർഡും ഒരു വാക്കിന്റെ ഏറ്റവും വ്യക്തമായ സത്ത നൽകുന്നു."],
+      ["Efficacy", "Noun", "ഫലപ്രാപ്തി", "Spaced intervals prove their efficacy over 30 days.", "ഇടവിട്ടുള്ള ആവർത്തനങ്ങൾ 30 ദിവസത്തിനുള്ളിൽ അവയുടെ ഫലപ്രാപ്തി തെളിയിക്കുന്നു."],
+      ["Fortify", "Verb", "കോട്ടകെട്ടി ഉറപ്പിക്കുക / ശക്തിപ്പെടുത്തുക", "Review sessions fortify your long-term memory.", "റിവിഷൻ സെഷനുകൾ നിങ്ങളുടെ ദീർഘകാല ഓർമ്മയെ ശക്തിപ്പെടുത്തുന്നു."],
+      ["Germane", "Adj", "പ്രസക്തമായ / ബന്ധപ്പെട്ട", "Choose examples that are germane to daily life.", "ദൈനംദിന ജീവിതത്തിന് പ്രസക്തമായ ഉദാഹരണങ്ങൾ തിരഞ്ഞെടുക്കുക."],
+      ["Hallmark", "Noun", "മുഖമുദ്ര / പ്രത്യേകത", "Precision is the hallmark of a confident communicator.", "കൃത്യത എന്നത് ആത്മവിശ്വാസമുള്ള ആശയവിനിമയക്കാരന്റെ മുഖമുദ്രയാണ്."],
+      ["Indispensable", "Adj", "ഒഴിച്ചുകൂടാനാവാത്ത", "Active vocabulary is indispensable for career growth.", "കരിയർ വളർച്ചയ്ക്ക് സജീവമായ പദസമ്പത്ത് ഒഴിച്ചുകൂടാനാവാത്തതാണ്."],
+      ["Juncture", "Noun", "നിർണ്ണായക ഘട്ടം", "At this juncture, you have mastered over 160 words.", "ഈ നിർണ്ണായക ഘട്ടത്തിൽ നിങ്ങൾ 160-ലധികം വാക്കുകൾ സ്വായത്തമാക്കിയിരിക്കുന്നു."],
+      ["Lexicon", "Noun", "പദസമ്പത്ത് / നിഘണ്ടു", "Your personal English lexicon grows stronger every day.", "നിങ്ങളുടെ വ്യക്തിഗത ഇംഗ്ലീഷ് പദസമ്പത്ത് ഓരോ ദിവസവും ശക്തമാകുന്നു."],
+
+      // Day 18
+      ["Astute", "Adj", "സൂക്ഷ്മബുദ്ധിയുള്ള / വിവേകമുള്ള", "Astute learners focus extra energy on their Weak Vault.", "വിവേകമുള്ള പഠിതാക്കൾ തങ്ങളുടെ പ്രയാസമുള്ള വാക്കുകളിൽ കൂടുതൽ ശ്രദ്ധ കേന്ദ്രീകരിക്കുന്നു."],
+      ["Coalesce", "Verb", "ഒത്തുചേരുക / ഒന്നിക്കുക", "Individual words coalesce into smooth, natural sentences.", "ഓരോ വാക്കുകളും ഒത്തുചേർന്ന് ഒഴുക്കുള്ള വാക്യങ്ങളായി മാറുന്നു."],
+      ["Discerning", "Adj", "തിരിച്ചറിവുള്ള", "A discerning reader notices subtle tone shifts.", "തിരിച്ചറിവുള്ള ഒരു വായനക്കാരൻ ഭാഷയിലെ സൂക്ഷ്മമായ മാറ്റങ്ങൾ ശ്രദ്ധിക്കുന്നു."],
+      ["Enrich", "Verb", "സമ്പന്നമാക്കുക", "New expressions enrich both speech and writing.", "പുതിയ പ്രയോഗങ്ങൾ സംസാരത്തെയും എഴുത്തിനെയും സമ്പന്നമാക്കുന്നു."],
+      ["Fulcrum", "Noun", "കേന്ദ്രബിന്ദു / ആധാരം", "Daily discipline is the fulcrum of rapid fluency.", "വേഗത്തിലുള്ള ഭാഷാപ്രാവീണ്യത്തിന്റെ കേന്ദ്രബിന്ദുവാണ് ദൈനംദിന അച്ചടക്കം."],
+      ["Harbor", "Verb", "മനസ്സിൽ സൂക്ഷിക്കുക", "Never harbor doubts about your ability to master English.", "ഇംഗ്ലീഷ് പഠിക്കാനുള്ള നിങ്ങളുടെ കഴിവിനെക്കുറിച്ച് ഒരിക്കലും സംശയം വെക്കരുത്."],
+      ["Illuminate", "Verb", "തെളിയിക്കുക", "Practice tests illuminate how much you truly remember.", "പരിശീലന പരീക്ഷകൾ നിങ്ങൾ എത്രത്തോളം ഓർക്കുന്നു എന്ന് തെളിയിക്കുന്നു."],
+      ["Judiciously", "Adv", "വിവേകത്തോടെ", "Use new words judiciously in professional emails.", "പ്രൊഫഷണൽ ഇമെയിലുകളിൽ പുതിയ വാക്കുകൾ വിവേകത്തോടെ ഉപയോഗിക്കുക."],
+      ["Kudos", "Noun", "അഭിനന്ദനം / പ്രശംസ", "Kudos to you for reaching Day 18 with consistency!", "സ്ഥിരതയോടെ പതിനെട്ടാം ദിവസത്തിൽ എത്തിയതിന് അഭിനന്ദനങ്ങൾ!"],
+      ["Linchpin", "Noun", "പ്രധാന ആധാരം", "Recall practice is the linchpin of memory retention.", "ഓർമ്മ നിലനിർത്തുന്നതിന്റെ പ്രധാന ആധാരമാണ് ഓർത്തെടുക്കൽ പരിശീലനം."],
+
+      // Day 19
+      ["Acumen", "Noun", "കൂർമ്മബുദ്ധി / കാര്യപ്രാപ്തി", "Strong communication enhances your professional acumen.", "മികച്ച ആശയവിനിമയം നിങ്ങളുടെ തൊഴിൽപരമായ കാര്യപ്രാപ്തി വർദ്ധിപ്പിക്കുന്നു."],
+      ["Bolstered", "Adj", "ശക്തിപ്പെടുത്തിയ", "Feel bolstered by the hundreds of words you now know.", "നിങ്ങൾക്ക് ഇപ്പോൾ അറിയാവുന്ന നൂറുകണക്കിന് വാക്കുകളാൽ ആത്മവിശ്വാസം നേടുക."],
+      ["Consummate", "Adj", "തികഞ്ഞ / പൂർണ്ണമായ", "She delivered the presentation with consummate skill.", "തികഞ്ഞ വൈദഗ്ധ്യത്തോടെ അവൾ പ്രസന്റേഷൻ അവതരിപ്പിച്ചു."],
+      ["Dauntless", "Adj", "നിർഭയമായ / ധൈര്യമുള്ള", "A dauntless attitude turns difficult words into easy wins.", "നിർഭയമായ മനോഭാവം പ്രയാസമുള്ള വാക്കുകളെ എളുപ്പമുള്ള വിജയങ്ങളാക്കി മാറ്റുന്നു."],
+      ["Eminence", "Noun", "ഉന്നതി / ശ്രേഷ്ഠത", "Continuous learning leads to eminence in any field.", "തുടർച്ചയായ പഠനം ഏതൊരു മേഖലയിലും ഉന്നതിയിലേക്ക് നയിക്കുന്നു."],
+      ["Flourishing", "Adj", "വളർന്നുകൊണ്ടിരിക്കുന്ന", "Your flourishing vocabulary opens doors worldwide.", "നിങ്ങളുടെ വളർന്നുകൊണ്ടിരിക്കുന്ന പദസമ്പത്ത് ലോകമെമ്പാടും വാതിലുകൾ തുറക്കുന്നു."],
+      ["Grit", "Noun", "നിശ്ചയദാർഢ്യം", "It takes daily grit to build a lifelong skill.", "ജീവിതകാലം മുഴുവൻ നിലനിൽക്കുന്ന ഒരു കഴിവ് വളർത്തിയെടുക്കാൻ ദൈനംദിന നിശ്ചയദാർഢ്യം ആവശ്യമാണ്."],
+      ["Harmony", "Noun", "പൊരുത്തം", "Thought and expression move in harmony when words come easily.", "വാക്കുകൾ എളുപ്പത്തിൽ വരുമ്പോൾ ചിന്തയും പ്രകടനവും പൊരുത്തത്തോടെ നീങ്ങുന്നു."],
+      ["Indelible", "Adj", "മായ്ക്കാനാവാത്ത / മനസ്സിൽ പതിഞ്ഞ", "Visual and audio cues leave an indelible impression.", "ദൃശ്യ-ശ്രാവ്യ സൂചനകൾ മനസ്സിൽ മായ്ക്കാനാവാത്ത മുദ്ര പതിപ്പിക്കുന്നു."],
+      ["Jubilee", "Noun", "ആഘോഷം / സന്തോഷവേള", "Prepare for your Day 20 graduation jubilee!", "ഇരുപതാം ദിവസത്തെ ബിരുദദാന ആഘോഷത്തിനായി തയ്യാറെടുക്കുക!"],
+
+      // Day 20
+      ["Apex", "Noun", "പരമോന്നത സ്ഥാനം / കൊടുമുടി", "You have reached the apex of this 20-day curriculum!", "ഈ 20 ദിവസത്തെ പാഠ്യപദ്ധതിയുടെ പരമോന്നത സ്ഥാനത്ത് നിങ്ങൾ എത്തിയിരിക്കുന്നു!"],
+      ["Bravo", "Interj", "അഭിനന്ദനങ്ങൾ / ഗംഭീരം", "Bravo! Completing 200 words is an outstanding achievement.", "ഗംഭീരം! 200 വാക്കുകൾ പൂർത്തിയാക്കുന്നത് മികച്ചൊരു നേട്ടമാണ്."],
+      ["Crowning", "Adj", "ഏറ്റവും പ്രധാനപ്പെട്ട / മകുടം ചാർത്തുന്ന", "Claim your certificate as the crowning moment of your effort.", "നിങ്ങളുടെ പ്രയത്നത്തിന്റെ മകുടം ചാർത്തുന്ന നിമിഷമായി സർട്ടിഫിക്കറ്റ് സ്വന്തമാക്കുക."],
+      ["Distinction", "Noun", "മികവ് / പ്രത്യേകത", "You completed this journey with true distinction.", "യഥാർത്ഥ മികവോടെയാണ് നിങ്ങൾ ഈ യാത്ര പൂർത്തിയാക്കിയത്."],
+      ["Exemplary", "Adj", "മാതൃകാപരമായ", "Your commitment to daily growth is exemplary.", "ദൈനംദിന വളർച്ചയോടുള്ള നിങ്ങളുടെ പ്രതിബദ്ധത മാതൃകാപരമാണ്."],
+      ["Fulfillment", "Noun", "പൂർത്തീകരണം / ആത്മസംതൃപ്തി", "True fulfillment comes from mastering a new skill.", "പുതിയൊരു കഴിവ് സ്വായത്തമാക്കുന്നതിലൂടെയാണ് യഥാർത്ഥ ആത്മസംതൃപ്തി ലഭിക്കുന്നത്."],
+      ["Grandeur", "Noun", "മഹത്വം / പ്രൗഢി", "Express your thoughts with clarity and grandeur.", "വ്യക്തതയോടെയും പ്രൗഢിയോടെയും നിങ്ങളുടെ ചിന്തകൾ പ്രകടിപ്പിക്കുക."],
+      ["Heritage", "Noun", "പൈതൃകം / സമ്പത്ത്", "Your mastered words are now a permanent intellectual heritage.", "നിങ്ങൾ സ്വായത്തമാക്കിയ വാക്കുകൾ ഇപ്പോൾ സ്ഥിരമായ ഒരു ബൗദ്ധിക സമ്പത്താണ്."],
+      ["Infinite", "Adj", "അനന്തമായ", "With 200 core words, your expressive possibilities are infinite.", "200 പ്രധാന വാക്കുകളിലൂടെ നിങ്ങളുടെ ആശയപ്രകാശന സാധ്യതകൾ അനന്തമാണ്."],
+      ["Zenith", "Noun", "ഉച്ചസ്ഥായി / പരമകാഷ്ഠ", "Celebrate reaching the zenith of CV LexiSpark!", "CV LexiSpark-ന്റെ ഉച്ചസ്ഥായിയിൽ എത്തിയത് ആഘോഷിക്കൂ!"]
+    ];
+
+    const WORDS = RAW_WORDS.map((item, idx) => ({
+      id: idx + 1,
+      day: Math.floor(idx / 10) + 1,
+      en: item[0],
+      pos: item[1],
+      ml: item[2],
+      ex: item[3],
+      exMl: item[4],
+      img: VISUAL_IMAGES[item[0]] || null
+    }));
+
+    const STORAGE_KEY = "cv_lexispark_state_v1";
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) return JSON.parse(raw);
+      } catch (e) {}
+      return {
+        currentDay: 1,
+        mode: "learn",
+        streak: 1,
+        freezes: 2,
+        xp: 0,
+        lastActiveDate: new Date().toDateString(),
+        progress: {} // id -> { level: 0..3, mistakes: 0, nextReview: timestamp }
+      };
+    }
+
+    let state = loadState();
+
+    // Streak & Freeze check on load
+    (function checkDailyStreak() {
+      const today = new Date().toDateString();
+      if (state.lastActiveDate !== today) {
+        const last = new Date(state.lastActiveDate);
+        const diffDays = Math.floor((new Date(today) - last) / (1000 * 60 * 60 * 24));
+        if (diffDays === 1) {
+          state.streak += 1;
+        } else if (diffDays > 1 && state.freezes > 0) {
+          state.freezes -= 1;
+        } else if (diffDays > 1) {
+          state.streak = 1;
+        }
+        state.lastActiveDate = today;
+        saveState();
+      }
+    })();
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {}
+      updateDashboard();
+    }
+
+    function getWordStat(id) {
+      if (!state.progress[id]) {
+        state.progress[id] = { level: 0, mistakes: 0, nextReview: 0 };
+      }
+      return state.progress[id];
+    }
+
+    function speakWord(text) {
+      if (!("speechSynthesis" in window)) return;
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = "en-US";
+      utter.rate = 0.92;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function getDueWords() {
+      const now = Date.now();
+      return WORDS.filter(w => {
+        const st = state.progress[w.id];
+        return st && st.level > 0 && st.nextReview <= now;
+      });
+    }
+
+    function getWeakWords() {
+      return WORDS.filter(w => {
+        const st = state.progress[w.id];
+        return st && st.mistakes > 0;
+      });
+    }
+
+    function updateDashboard() {
+      const mastered = WORDS.filter(w => (state.progress[w.id]?.level || 0) >= 2).length;
+      const due = getDueWords().length;
+      const weak = getWeakWords().length;
+
+      document.getElementById("masteredCount").textContent = mastered;
+      document.getElementById("overallBar").style.width = `${Math.round((mastered / WORDS.length) * 100)}%`;
+      document.getElementById("streakCount").textContent = state.streak;
+      document.getElementById("freezeCount").textContent = state.freezes;
+      document.getElementById("dueCount").textContent = due;
+      document.getElementById("weakCount").textContent = weak;
+      document.getElementById("tabDueBadge").textContent = due;
+      document.getElementById("tabWeakBadge").textContent = weak;
+
+      document.getElementById("certWordsText").textContent = `${mastered} / 200`;
+      document.getElementById("certXp").textContent = `${state.xp} XP`;
+      document.getElementById("certDate").textContent = new Date().toLocaleDateString();
+
+      renderDayStrip();
+    }
+
+    function renderDayStrip() {
+      const strip = document.getElementById("dayStrip");
+      strip.innerHTML = "";
+      for (let d = 1; d <= 20; d++) {
+        const dayWords = WORDS.filter(w => w.day === d);
+        const doneCount = dayWords.filter(w => (state.progress[w.id]?.level || 0) >= 2).length;
+        const btn = document.createElement("button");
+        btn.className = "day-chip" + (state.currentDay === d ? " active" : "") + (doneCount === 10 ? " completed" : "");
+        btn.innerHTML = `Day ${d} <span style="opacity:0.75">(${doneCount}/10)</span>`;
+        btn.onclick = () => {
+          state.currentDay = d;
+          saveState();
+          renderWorkspace();
+        };
+        strip.appendChild(btn);
+      }
+    }
+
+    // Quiz Session State
+    let quizQueue = [];
+    let quizIndex = 0;
+    let quizStage = 1; // 1 = MCQ, 2 = Active Recall Typing
+
+    function startQuizSession(wordList) {
+      quizQueue = [...wordList].sort(() => Math.random() - 0.5);
+      quizIndex = 0;
+      quizStage = 1;
+      renderQuizCard();
+    }
+
+    function renderQuizCard() {
+      const ws = document.getElementById("workspace");
+      if (!quizQueue.length) {
+        ws.innerHTML = `
+          <div class="empty-box">
+            <h3>ഈ വിഭാഗത്തിൽ നിലവിൽ വാക്കുകളൊന്നുമില്ല! 🎉</h3>
+            <p style="margin-top:8px;">മറ്റൊരു ദിവസം തിരഞ്ഞെടുക്കുകയോ Discover Cards വഴി പുതിയ വാക്കുകൾ പഠിക്കുകയോ ചെയ്യാം.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const current = quizQueue[quizIndex];
+      const stageLabel = quizStage === 1
+        ? "Stage 1: Recognize Meaning (ശരിയായ വാക്ക് തിരഞ്ഞെടുക്കുക)"
+        : "Stage 2: Active Recall (സ്പെല്ലിംഗ് ടൈപ്പ് ചെയ്ത് ഉറപ്പിക്കുക)";
+
+      if (quizStage === 1) {
+        // Generate 3 distractors
+        const distractors = WORDS
+          .filter(w => w.id !== current.id)
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 3);
+        const choices = [current, ...distractors].sort(() => Math.random() - 0.5);
+
+        ws.innerHTML = `
+          <div class="arena-box">
+            <div class="arena-header">
+              <span class="stage-pill">${stageLabel}</span>
+              <span class="no-image-note">🙈 Quiz Mode: ചിത്രം മറച്ചുവെച്ചിരിക്കുന്നു (Pure Memory Recall)</span>
+            </div>
+            <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:10px;">
+              Question ${quizIndex + 1} of ${quizQueue.length} • +15 XP
+            </div>
+            <div class="prompt-card">
+              <div class="prompt-label">ഈ മലയാളം അർത്ഥത്തിന് അനുയോജ്യമായ ഇംഗ്ലീഷ് വാക്ക് ഏതാണ്?</div>
+              <div class="prompt-main" style="color:var(--emerald)">${current.ml}</div>
+              <div class="prompt-hint">"${current.ex.replace(new RegExp(current.en, "gi"), "_____")}"</div>
+            </div>
+            <div class="options-grid" id="optionsGrid"></div>
+            <div class="feedback-banner" id="quizFeedback"></div>
+          </div>
+        `;
+
+        const grid = document.getElementById("optionsGrid");
+        choices.forEach(opt => {
+          const btn = document.createElement("button");
+          btn.className = "option-btn";
+          btn.textContent = opt.en;
+          btn.onclick = () => handleMcqAnswer(btn, opt.id === current.id, current);
+          grid.appendChild(btn);
+        });
+      } else {
+        // Stage 2: Active Recall Typing
+        const maskedHint = current.en[0] + " _ ".repeat(current.en.length - 2) + current.en[current.en.length - 1];
+        ws.innerHTML = `
+          <div class="arena-box">
+            <div class="arena-header">
+              <span class="stage-pill">${stageLabel}</span>
+              <span class="no-image-note">✍️ Active Recall: ഓർത്തെടുത്ത് ടൈപ്പ് ചെയ്യുക</span>
+            </div>
+            <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:10px;">
+              Question ${quizIndex + 1} of ${quizQueue.length} • +25 XP
+            </div>
+            <div class="prompt-card">
+              <div class="prompt-label">അർത്ഥവും സൂചനയും നോക്കി വാക്ക് ടൈപ്പ് ചെയ്യുക</div>
+              <div class="prompt-main" style="color:var(--emerald)">${current.ml}</div>
+              <div class="prompt-hint" style="margin-bottom:10px;">Hint: <strong style="letter-spacing:2px;color:var(--cyan)">${maskedHint}</strong> (${current.en.length} letters)</div>
+              <div class="prompt-hint">"${current.ex.replace(new RegExp(current.en, "gi"), "_____")}"</div>
+            </div>
+            <div class="recall-input-wrap">
+              <input type="text" id="recallInput" class="recall-input" placeholder="ഇംഗ്ലീഷ് വാക്ക് ഇവിടെ ടൈപ്പ് ചെയ്യുക..." autocomplete="off" />
+              <button class="btn btn-primary" id="checkRecallBtn">Check Answer</button>
+            </div>
+            <div class="feedback-banner" id="quizFeedback"></div>
+          </div>
+        `;
+
+        const input = document.getElementById("recallInput");
+        const checkBtn = document.getElementById("checkRecallBtn");
+        input.focus();
+        input.addEventListener("keydown", e => {
+          if (e.key === "Enter") checkBtn.click();
+        });
+        checkBtn.onclick = () => handleRecallAnswer(input.value.trim(), current);
+      }
+    }
+
+    function handleMcqAnswer(btn, isCorrect, word) {
+      const buttons = document.querySelectorAll(".option-btn");
+      buttons.forEach(b => (b.disabled = true));
+      const fb = document.getElementById("quizFeedback");
+      const st = getWordStat(word.id);
+
+      if (isCorrect) {
+        btn.classList.add("correct");
+        speakWord(word.en);
+        state.xp += 15;
+        st.level = Math.max(st.level, 1);
+        st.nextReview = Date.now() + 24 * 60 * 60 * 1000; // +1 day
+        fb.className = "feedback-banner good";
+        fb.textContent = `ശരിയാണ്! "${word.en}" — ഇനി അടുത്ത ഘട്ടത്തിലേക്ക്...`;
+        saveState();
+        setTimeout(() => {
+          advanceQuiz();
+        }, 900);
+      } else {
+        btn.classList.add("wrong");
+        st.mistakes += 1;
+        fb.className = "feedback-banner bad";
+        fb.textContent = `തെറ്റിപ്പോയി! ശരിയായ ഉത്തരം: ${word.en} (${word.ml}). ഇത് Weak Vault-ലേക്ക് ചേർത്തിട്ടുണ്ട്.`;
+        saveState();
+        setTimeout(() => {
+          advanceQuiz();
+        }, 1600);
+      }
+    }
+
+    function handleRecallAnswer(typed, word) {
+      if (!typed) return;
+      const fb = document.getElementById("quizFeedback");
+      const st = getWordStat(word.id);
+      const isCorrect = typed.toLowerCase() === word.en.toLowerCase();
+
+      if (isCorrect) {
+        speakWord(word.en);
+        state.xp += 25;
+        st.level = Math.min(3, st.level + 1);
+        // Spaced Repetition Interval: level 2 -> 3 days, level 3 -> 7 days
+        const daysAhead = st.level >= 3 ? 7 : 3;
+        st.nextReview = Date.now() + daysAhead * 24 * 60 * 60 * 1000;
+        if (st.mistakes > 0) st.mistakes -= 1;
+
+        fb.className = "feedback-banner good";
+        fb.textContent = `അത്യുഗ്രൻ! "${word.en}" മനസ്സിൽ ഉറച്ചു (അടുത്ത റിവിഷൻ ${daysAhead} ദിവസത്തിന് ശേഷം).`;
+        saveState();
+        setTimeout(() => {
+          advanceQuiz();
+        }, 1100);
+      } else {
+        st.mistakes += 1;
+        fb.className = "feedback-banner bad";
+        fb.textContent = `ശരിയായ സ്പെല്ലിംഗ്: "${word.en}" — വീണ്ടും ഒന്ന് ശ്രദ്ധിക്കൂ!`;
+        saveState();
+        setTimeout(() => {
+          advanceQuiz();
+        }, 1600);
+      }
+    }
+
+    function advanceQuiz() {
+      if (quizIndex + 1 < quizQueue.length) {
+        quizIndex += 1;
+        renderQuizCard();
+      } else if (quizStage === 1) {
+        quizStage = 2;
+        quizIndex = 0;
+        quizQueue.sort(() => Math.random() - 0.5);
+        renderQuizCard();
+      } else {
+        const ws = document.getElementById("workspace");
+        ws.innerHTML = `
+          <div class="arena-box" style="text-align:center;">
+            <div style="font-size:2.6rem;margin-bottom:10px;">🏆</div>
+            <h2>Session Complete! മികച്ച പ്രകടനം!</h2>
+            <p style="color:var(--text-soft);margin:10px 0 20px;">
+              നിങ്ങൾ ഈ സെഷനിലെ വാക്കുകൾ Spaced Repetition ഷെഡ്യൂളിലേക്ക് വിജയകരമായി ചേർത്തിരിക്കുന്നു.
+            </p>
+            <button class="btn btn-primary" onclick="switchMode('learn')">📖 വാക്കുകളിലേക്ക് മടങ്ങുക</button>
+          </div>
+        `;
+      }
+    }
+
+    function renderLearnCards() {
+      const ws = document.getElementById("workspace");
+      const dayWords = WORDS.filter(w => w.day === state.currentDay);
+
+      const grid = document.createElement("div");
+      grid.className = "cards-grid";
+
+      dayWords.forEach(w => {
+        const st = getWordStat(w.id);
+        const card = document.createElement("article");
+        card.className = "word-card";
+
+        let visualHtml = "";
+        if (w.img) {
+          visualHtml = `
+            <div class="word-visual">
+              <img src="${w.img}" alt="${w.en}" loading="lazy" onerror="this.parentElement.style.display='none'" />
+              <span class="visual-badge">🖼️ Visual Memory</span>
+            </div>
+          `;
+        }
+
+        let statusClass = "mastery-tag";
+        let statusText = "New Word";
+        if (st.level >= 2) {
+          statusClass += " done";
+          statusText = "✓ Mastered";
+        } else if (st.mistakes > 0) {
+          statusClass += " weak";
+          statusText = "⚠ Weak Word";
+        } else if (st.level === 1) {
+          statusText = "In Progress";
+        }
+
+        card.innerHTML = `
+          ${visualHtml}
+          <div class="card-body">
+            <div class="word-head">
+              <div>
+                <div class="word-pos">${w.pos} • Day ${w.day}</div>
+                <div class="word-en">${w.en}</div>
+              </div>
+              <button class="audio-btn" title="Listen Pronunciation" data-speak="${w.en}">🔊</button>
+            </div>
+            <div class="word-ml">${w.ml}</div>
+            <div class="context-box">
+              “${w.ex}”
+              <small>${w.exMl}</small>
+            </div>
+            <div class="card-footer">
+              <span class="${statusClass}">${statusText}</span>
+              <button class="btn" style="padding:6px 12px;font-size:0.78rem;" data-mark="${w.id}">
+                ${st.level >= 2 ? "★ Mastered" : "Mark Learned"}
+              </button>
+            </div>
+          </div>
+        `;
+
+        card.querySelector("[data-speak]").onclick = () => speakWord(w.en);
+        card.querySelector("[data-mark]").onclick = () => {
+          const s = getWordStat(w.id);
+          s.level = s.level >= 2 ? 0 : 2;
+          s.nextReview = Date.now() + 3 * 24 * 60 * 60 * 1000;
+          if (s.level >= 2) state.xp += 10;
+          saveState();
+          renderLearnCards();
+        };
+
+        grid.appendChild(card);
+      });
+
+      ws.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+          <div>
+            <h2 style="font-size:1.2rem;">Day ${state.currentDay} — Core 10 Words</h2>
+            <p style="font-size:0.84rem;color:var(--text-muted);">ഉച്ചാരണം കേട്ട്, ചിത്രങ്ങളും സന്ദർഭ വാക്യങ്ങളും ശ്രദ്ധിച്ച് പഠിച്ച ശേഷം Quiz തുടങ്ങുക.</p>
+          </div>
+          <button class="btn btn-primary" id="startDayQuizBtn">🧠 Start Day ${state.currentDay} Recall Quiz →</button>
+        </div>
+      `;
+      ws.appendChild(grid);
+
+      document.getElementById("startDayQuizBtn").onclick = () => {
+        switchMode("practice");
+      };
+    }
+
+    function switchMode(mode) {
+      state.mode = mode;
+      document.querySelectorAll(".tab-btn").forEach(b => {
+        b.classList.toggle("active", b.dataset.mode === mode);
+      });
+      renderWorkspace();
+    }
+
+    function renderWorkspace() {
+      if (state.mode === "learn") {
+        renderLearnCards();
+      } else if (state.mode === "practice") {
+        const dayWords = WORDS.filter(w => w.day === state.currentDay);
+        startQuizSession(dayWords);
+      } else if (state.mode === "review") {
+        startQuizSession(getDueWords());
+      } else if (state.mode === "weak") {
+        startQuizSession(getWeakWords());
+      }
+    }
+
+    // Event Listeners
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.onclick = () => switchMode(btn.dataset.mode);
+    });
+
+    document.getElementById("openCertBtn").onclick = () => {
+      document.getElementById("certModal").classList.add("open");
+    };
+
+    document.getElementById("closeCertBtn").onclick = () => {
+      document.getElementById("certModal").classList.remove("open");
+    };
+
+    // Initial Boot
+    updateDashboard();
+    renderWorkspace();
+  </script>
+</body>
+</html>
